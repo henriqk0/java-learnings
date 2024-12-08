@@ -393,6 +393,7 @@ public class Entrada {
      * @param s: Objeto a classe Sistema.
      */
     public void listarPedidos(Aluno a, Sistema s) {
+        System.out.println("\nPedidos de " + a);
         for (Pedido p : s.filtrarPedidos(a)) {
             System.out.println(p);
 
