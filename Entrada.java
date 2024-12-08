@@ -316,7 +316,7 @@ public class Entrada {
     }
 
     /**
-     * Lê os dados de uma nova sala e cadastra-a no sistema.
+     * Realização de um Pedido de um Aluno e seu registro no Sistema
      * @param a: Objeto a classe Aluno.
      * @param s: Objeto a classe Sistema.
      */
