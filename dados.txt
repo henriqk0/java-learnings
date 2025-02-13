@@ -1,0 +1,14 @@
+ADM
+123.456.789-00
+Enzo da Silva
+enzo
+enzo@gmail.com
+ALU
+234.567.890-00
+Maria Pereira
+maria
+ALU
+345.678.900-00
+Pedro da Cruz
+pedro
+FIM

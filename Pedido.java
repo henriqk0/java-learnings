@@ -78,6 +78,7 @@ public class Pedido {
         for (Item i : this.getCarrinho()) {
             valor += i.valorTotal();
         }
+        valor += 1; // taxa 
 
         return valor;
     }
@@ -90,7 +91,7 @@ public class Pedido {
 
     public void confirmar() {
         // saldo maior que a taxa (80% de 1 vai para o entregador)
-        if (this.getCliente().retirarSaldo(this.valorTotal() + 1.0)) {
+        if (this.getCliente().retirarSaldo(this.valorTotal())) {
             for (Item in_p : this.getCarrinho()) {
                 in_p.getProd().retirarDeEstoque(in_p.getQtd());
             }

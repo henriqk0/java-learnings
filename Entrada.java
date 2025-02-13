@@ -342,7 +342,7 @@ public class Entrada {
             op = this.lerInteiro(msg);
         }
         
-        if (a.saldoSuficiente(p.valorTotal() + 1.0)) { 
+        if (a.saldoSuficiente(p.valorTotal())) { 
             p.confirmar();  // supondo que ela não vá inserir o mesmo produto mais de uma vez
             s.addPedido(p);
         }
