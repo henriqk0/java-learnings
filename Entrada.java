@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.InputMismatchException;
@@ -113,8 +115,8 @@ public class Entrada {
     /**
      * Exibe o menu principal até que o usuário opte por sair do programa.
      * @param s: Objeto a classe Sistema.
-     */
-    public void menu(Sistema s) {
+    */
+    public void menu(Sistema s) throws IOException {
         this.lerSalvos(s);
 
         if (s.sistemaVazio()) {
@@ -141,8 +143,8 @@ public class Entrada {
      * Exibe o menu do administrador até que o usuário deslogue.
      * @param a: Objeto a classe Admin.
      * @param s: Objeto a classe Sistema.
-     */
-    public void menu(Admin a, Sistema s) {
+    */
+    public void menu(Admin a, Sistema s) throws IOException {
         String msg = "\n*********************\n" +
                 "Escolha uma opção:\n" +
                 "1) Cadastrar novo administrador.\n" +
@@ -154,7 +156,7 @@ public class Entrada {
         int op = this.lerInteiro(msg);
 
         while (op != 0) {
-            if (op == 1) cadAdmin(s);
+            if (op == 1) { cadAdmin(s); }
             if (op == 2) { cadAluno(s); }
             if (op == 3) { cadProduto(s); }
             if (op == 4) { cadSala(s); }
@@ -191,7 +193,7 @@ public class Entrada {
         }
     }
 
-    public void login(Sistema s) {
+    public void login(Sistema s) throws IOException {
         System.out.println("\nBem vindo! Digite seus dados de login:");
         String cpf = this.lerLinha("CPF:");
         String senha = this.lerLinha("Senha:");
@@ -224,8 +226,8 @@ public class Entrada {
     /**
      * Lê os dados de um novo administrador e cadastra-o no sistema.
      * @param s: Um objeto da classe Sistema
-     */
-    public void cadAdmin(Sistema s) {
+    */
+    public void cadAdmin(Sistema s) throws IOException {
         System.out.println("\n** Cadastrando um novo administrador **\n");
         String cpf = this.lerLinha("Digite o cpf: ");
 
@@ -240,6 +242,10 @@ public class Entrada {
         Admin a = new Admin(cpf, nome, senha, email);
         s.addAdmin(a);
 
+        FileWriter f = new FileWriter("salvos.txt", true);
+        BufferedWriter br = new BufferedWriter(f);
+        a.salvarArq(br);
+
         System.out.println("Usuário " + a + " criado com sucesso.");
     }
 
@@ -247,7 +253,7 @@ public class Entrada {
      * Lê os dados de um novo aluno e cadastra-o no sistema.
      * @param s: Um objeto da classe Sistema
      */
-    public void cadAluno(Sistema s) {
+    public void cadAluno(Sistema s) throws IOException {
         System.out.println("\n** Cadastrando um novo aluno **\n");
         String cpf = this.lerLinha("Digite o cpf: ");
 
@@ -260,6 +266,10 @@ public class Entrada {
         
         Aluno a = new Aluno(cpf, nome, senha);
         s.addAluno(a);
+
+        FileWriter f = new FileWriter("salvos.txt", true);
+        BufferedWriter br = new BufferedWriter(f);
+        a.salvarArq(br);
         
         System.out.println("Usuário " + a + " criado com sucesso.");
     }
@@ -278,6 +288,7 @@ public class Entrada {
             nome = this.lerLinha("Já existe um produto com este nome. Escolha outro nome: ");
         }
 
+        // possíveis exceptions:
         Integer qtd = this.lerInteiro("Digite a quantidade em estoque: ");
         Double valor = this.lerDouble("Digite o valor unitário do produto: ");        
 
@@ -436,6 +447,7 @@ public class Entrada {
      */
     public void listarPedidos(Aluno a, Sistema s) {
         System.out.println("\nPedidos de " + a);
+        System.out.println("*");
 
         List<Pedido> ordP = s.filtrarPedidos(a);
         Collections.sort(ordP);
@@ -449,6 +461,7 @@ public class Entrada {
             System.out.println("Status: " + p.status());
 
             System.out.println("Valor total: R$" + String.format("%.2f", p.valorTotal()));
+            System.out.println("*");
         }
     }
 

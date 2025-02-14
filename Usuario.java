@@ -28,9 +28,7 @@ public abstract class Usuario {
         }
     }
 
-    public String toString() {
-        return this.nome + " - CPF: " + this.cpf;
-    }
+    public abstract String toString();
 
     public String getCPF() {
         return this.cpf;

@@ -20,7 +20,6 @@ public class Pedido implements Comparable<Pedido> {
         if (this.valorTotal() < p.valorTotal()) return 1;
 
         return 0;
-                
     }
 
     public String getCod() {
@@ -49,7 +48,7 @@ public class Pedido implements Comparable<Pedido> {
 
     @Override
     public String toString() {
-        return "\nCódigo do Pedido: " + this.getCod();
+        return "Código do Pedido: " + this.getCod();
     }
 
     public Pedido(String cod, Aluno cliente,  Sala s) {

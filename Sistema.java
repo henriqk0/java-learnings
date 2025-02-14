@@ -1,21 +1,24 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Sistema {
     private ArrayList<Aluno> alunos;
     private ArrayList<Admin> adms;
     private ArrayList<Produto> prods;
-    private ArrayList<Pedido> pedidos;
+    private LinkedList<Pedido> pedidos;
     private ArrayList<Sala> salas;
 
     public Sistema() {
         this.alunos = new ArrayList<>();
         this.adms = new ArrayList<>();
         this.prods = new ArrayList<>();
-        this.pedidos = new ArrayList<>();
+        this.pedidos = new LinkedList<>();
         this.salas = new ArrayList<>();
     }
 
-    public ArrayList<Pedido> getPedidos() {
+    public List<Pedido> getPedidos() {
         return this.pedidos;
     }
 
@@ -109,6 +112,8 @@ public class Sistema {
     }
 
     public void listarProdutos(Pedido p) {
+        // fazer o sort (mais caros primeiro?)
+        Collections.sort(p.getCarrinho());
         for (Item it : p.getCarrinho()) {
             System.out.println(it);
         }
@@ -122,8 +127,8 @@ public class Sistema {
 
     }
 
-    public ArrayList<Pedido> filtrarPedidos(boolean disponivel) {
-        ArrayList<Pedido> disponiveis = new ArrayList<>();
+    public List<Pedido> filtrarPedidos(boolean disponivel) {
+        List<Pedido> disponiveis = new LinkedList<>();
         for (Pedido p: this.pedidos){
             if (p.disponivel() == disponivel) {
                 disponiveis.add(p);
@@ -133,8 +138,8 @@ public class Sistema {
         return disponiveis;
     }
 
-    public ArrayList<Pedido> filtrarPedidos(Aluno a) {
-        ArrayList<Pedido> pedidos_do_aluno = new ArrayList<>();
+    public List<Pedido> filtrarPedidos(Aluno a) {
+        List<Pedido> pedidos_do_aluno = new LinkedList<>();
         for (Pedido p: this.pedidos){
             if (p.getCliente() == a ) {
                 pedidos_do_aluno.add(p);

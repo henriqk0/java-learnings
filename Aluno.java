@@ -1,5 +1,4 @@
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Aluno extends Usuario implements Salvavel{
@@ -11,12 +10,11 @@ public class Aluno extends Usuario implements Salvavel{
     }
 
     public String toString() {
-        return super.toString() + " (Saldo: R$" + String.format("%.2f", this.saldo) + ")";
+        return this.nome + " - CPF: " + this.cpf + " (Saldo: R$" + String.format("%.2f", this.saldo) + ")";
     }
 
-    public void salvarArq(BufferedWriter b){
+    public void salvarArq(BufferedWriter b) throws IOException {
         try {
-            FileWriter f = new FileWriter("salvos.txt", true);
             b.write("ALU");
             b.newLine();
             b.write(this.cpf);
@@ -25,8 +23,9 @@ public class Aluno extends Usuario implements Salvavel{
             b.newLine();
             b.write(this.getSenha());
             b.newLine();
-            f.close();
-        } catch(IOException e) {
+            b.close();
+            throw new Exception();
+        } catch(Exception e) {
             System.out.println("Não foi possível salvar o Aluno");
         }
     }

@@ -10,9 +10,8 @@ public class Admin extends Usuario implements Salvavel{
         this.email = email;
     }
 
-    public void salvarArq(BufferedWriter b){
+    public void salvarArq(BufferedWriter b) throws IOException{
         try {
-            FileWriter f = new FileWriter("salvos.txt", true);
             b.write("ADM");
             b.newLine();
             b.write(this.cpf);
@@ -21,14 +20,16 @@ public class Admin extends Usuario implements Salvavel{
             b.newLine();
             b.write(this.getSenha());
             b.newLine();
-            f.close();
-        } catch(IOException e) {
-            System.out.println("Não foi possível salvar o Aluno");
+            b.close();
+            throw new Exception();
+        } catch(Exception e) {
+            System.out.println("Não foi possível salvar o Administrador");
         }
     }
 
     public String toString() {
-        return super.toString() + " (ADMIN)";
+
+        return this.nome + " - CPF: " + this.cpf + " (ADMIN)";
     }
 
 }
