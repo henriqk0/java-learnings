@@ -1,10 +1,9 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.Pipe.SourceChannel;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -26,7 +25,7 @@ public class Entrada {
     public Entrada() {
         try {
             // Se houver um arquivo input.txt na pasta corrente, o Scanner vai ler dele.
-            this.input = new Scanner(new FileInputStream("input2.txt")).useLocale(Locale.US);
+            this.input = new Scanner(new FileInputStream("entrada.txt")).useLocale(Locale.US);
             // NAO ALTERE A LOCALICAÇÃO DO ARQUIVO!!
         } catch (FileNotFoundException e) {
             // Caso contrário, vai ler do teclado.
@@ -40,8 +39,7 @@ public class Entrada {
             BufferedReader br = new BufferedReader(f);
             String linha, cpf, nome, senha, email;
 
-            // null ou FIM 
-            while ((linha = br.readLine()) != null){
+            while (!(linha = br.readLine()).equals("FIM")){
                 if (linha.equals("ADM")) { 
                     cpf = br.readLine();
                     nome = br.readLine();
@@ -62,10 +60,10 @@ public class Entrada {
             f.close();
         } 
         catch(FileNotFoundException e) {
-            System.out.println("Arquivo inexistente.");
+            System.out.println("Erro. Arquivo inexistente: " + e.getMessage());
         }
         catch(IOException e) {
-            System.out.println("Não foi possível salvar Usuários");
+            System.out.println("Erro. Não foi possível carregar Usuários: " + e.getMessage());
         }
 
     }
@@ -107,9 +105,9 @@ public class Entrada {
                 int num = Integer.parseInt(linha);
                 return num;
             } catch (NumberFormatException e) {
-                System.out.println("Erro. Número inválido.");
+                System.out.println("Erro. Digite somente um número.");
                 linha = this.lerLinha(msg);
-            }
+            } 
         }
     }
 
@@ -124,11 +122,18 @@ public class Entrada {
         while (true) {
             try {
                 Double num = Double.parseDouble(linha);
+                if (num < 0) {
+                    throw new NaoNegativosException("Erro. O número não pode ser negativo.");
+                }
                 return num;
             } catch (NumberFormatException e) {
                 System.out.println("Erro. Número inválido.");
                 linha = this.lerLinha(msg);
+            } catch (NaoNegativosException e) {
+                System.out.println(e.getMessage());
+                linha = this.lerLinha(msg);
             }
+
         } 
     }
 
@@ -140,7 +145,7 @@ public class Entrada {
      * Exibe o menu principal até que o usuário opte por sair do programa.
      * @param s: Objeto a classe Sistema.
     */
-    public void menu(Sistema s) throws IOException {
+    public void menu(Sistema s)  {
         this.lerSalvos(s);
 
         if (s.sistemaVazio()) {
@@ -180,20 +185,8 @@ public class Entrada {
         int op = this.lerInteiro(msg);
 
         while (op != 0) {
-            if (op == 1) { 
-                try {
-                    cadAdmin(s);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } 
-            }
-            if (op == 2) { 
-                try {
-                    cadAluno(s);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+            if (op == 1) { cadAdmin(s); }
+            if (op == 2) { cadAluno(s); }
             if (op == 3) { cadProduto(s); }
             if (op == 4) { cadSala(s); }
             if (op < 0 || op > 4) System.out.println("Opção inválida. Tente novamente: ");
@@ -229,7 +222,7 @@ public class Entrada {
         }
     }
 
-    public void login(Sistema s) throws IOException {
+    public void login(Sistema s)  {
         System.out.println("\nBem vindo! Digite seus dados de login:");
         String cpf = this.lerLinha("CPF:");
         String senha = this.lerLinha("Senha:");
@@ -263,7 +256,7 @@ public class Entrada {
      * Lê os dados de um novo administrador e cadastra-o no sistema.
      * @param s: Um objeto da classe Sistema
     */
-    public void cadAdmin(Sistema s) throws IOException {
+    public void cadAdmin(Sistema s)  {
         System.out.println("\n** Cadastrando um novo administrador **\n");
         String cpf = this.lerLinha("Digite o cpf: ");
 
@@ -278,28 +271,21 @@ public class Entrada {
         Admin a = new Admin(cpf, nome, senha, email);
         s.addAdmin(a);
 
-        FileWriter f = null;
-        BufferedWriter bw = null; 
+        System.out.println("Usuário " + a + " criado com sucesso.");
+
         try {
-            f = new FileWriter("dados.txt", true);
-            bw = new BufferedWriter(f);
-            a.salvarArq(bw);
-        } catch (Exception e) {
+            s.salvarUsuarios();
+        } catch (IOException e) {
+            System.out.println("Erro ao tentar salvar Usuários: " + e.getMessage());
             e.printStackTrace();
         }
-        finally{
-            if (bw != null) { bw.close(); }
-            if (f != null) { f.close(); }
-        }
-
-        System.out.println("Usuário " + a + " criado com sucesso.");
     }
 
     /**
      * Lê os dados de um novo aluno e cadastra-o no sistema.
      * @param s: Um objeto da classe Sistema
      */
-    public void cadAluno(Sistema s) throws Exception {
+    public void cadAluno(Sistema s) {
         System.out.println("\n** Cadastrando um novo aluno **\n");
         String cpf = this.lerLinha("Digite o cpf: ");
 
@@ -313,21 +299,14 @@ public class Entrada {
         Aluno a = new Aluno(cpf, nome, senha);
         s.addAluno(a);
 
-        FileWriter f = null;
-        BufferedWriter bw = null; 
+        System.out.println("Usuário " + a + " criado com sucesso.");
+
         try {
-            f = new FileWriter("dados.txt", true);
-            bw = new BufferedWriter(f);
-            a.salvarArq(bw);
-        } catch (Exception e) {
+            s.salvarUsuarios();
+        } catch (IOException e) {
+            System.out.println("Erro ao tentar salvar Usuários: " + e.getMessage());
             e.printStackTrace();
         }
-        finally{
-            if (bw != null) { bw.close(); }
-            if (f != null) { f.close(); }
-        }
-        
-        System.out.println("Usuário " + a + " criado com sucesso.");
     }
 
     /**
@@ -338,7 +317,6 @@ public class Entrada {
         System.out.println("\n** Cadastrando um novo produto **\n");
         String nome = this.lerLinha("Digite o nome do produto: ");
 
-        // criar um loop infinito em nome ?
         while (s.getNomeProduto(nome) != null) {
             nome = this.lerLinha("Já existe um produto com este nome. Escolha outro nome: ");
         }
@@ -407,11 +385,15 @@ public class Entrada {
         System.out.println("");
 
         String cod = this.lerLinha("Digite o código do produto: ");
-        while (s.getProduto(cod) == null) {
-            cod = this.lerLinha("Produto inexistente. Digite um dos códigos listados: ");
+        while (s.getProduto(cod) == null || (s.getProduto(cod) != null && s.getProduto(cod).getQtd() == 0)) {
+            cod = this.lerLinha("Produto indisponível. Digite um dos códigos listados: ");
         }
 
         Integer quantd = this.lerInteiro("Digite a quantidade de " + s.getProduto(cod) + " no pedido: ");
+        while (quantd <= 0) {
+            System.out.println("Não se pode pedir uma quantidade nula ou negativa.");
+            quantd = this.lerInteiro("Digite a quantidade de " + s.getProduto(cod) + " no pedido: ");
+        }
 
         while ((s.getProduto(cod).getQtd()) < quantd) {
             quantd = this.lerInteiro("Só há " + s.getProduto(cod).getQtd() + " no estoque. Digite outra quantidade: ");
@@ -468,8 +450,8 @@ public class Entrada {
         this.listarPedidos(s);
 
         String escolhido = this.lerLinha("Digite o código do pedido: ");
-        while ((s.getPedido(escolhido) == null)) {
-            escolhido = this.lerLinha("Pedido inexistente. Digite um dos códigos válido: ");
+        while ((s.getPedido(escolhido) == null) || (s.getPedido(escolhido) != null && !s.getPedido(escolhido).disponivel())) {
+            escolhido = this.lerLinha("Pedido indisponível. Digite um dos códigos válido: ");
         }
 
         (s.getPedido(escolhido)).atribuirEntregador(a);

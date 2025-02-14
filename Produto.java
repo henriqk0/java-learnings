@@ -4,9 +4,20 @@ public class Produto {
     private Double valor;
     private String cod;
 
-
     public Integer getQtd() {
         return qtd;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setQtd(Integer qtd) {
+        this.qtd = qtd;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 
     public String getNome() {

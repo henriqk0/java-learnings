@@ -4,12 +4,10 @@
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        Sistema s = new Sistema();
-        Entrada e = new Entrada();
+    public static void main(String[] args) {
+        Sistema sist = new Sistema();
+        Entrada entr = new Entrada();
 
-        e.menu(s);
-
-        // salvar todos os os alunos e adms depois de tudo.
+        entr.menu(sist);
     }
 }

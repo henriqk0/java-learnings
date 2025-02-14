@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -149,14 +152,36 @@ public class Sistema {
         return pedidos_do_aluno;
     }
 
-    public void salvarUsuarios() {
-        List<Usuario> users = new LinkedList<>();
-        users.addAll(this.alunos);
-        users.addAll(this.adms);  
+    public void salvarUsuarios() throws IOException  {
+        FileWriter f = null;
+        BufferedWriter bw = null;
+        
+        try {
+            f = new FileWriter("dados.txt", false);
+            bw = new BufferedWriter(f);
 
-        for (Usuario u : users) {
+            List<Usuario> users = new LinkedList<>();
+            users.addAll(this.alunos);
+            users.addAll(this.adms);  
 
+            for (Usuario u : users) {
+                if (u instanceof Aluno) {
+                    ((Aluno)u).salvarArq(bw);;
+                }
+                else {
+                    ((Admin)u).salvarArq(bw);
+                }
+            }
+            bw.write("FIM");
+
+            bw.close();
+            f.close();
+        } catch (Exception e) {
+            System.out.println("Não foi possível salvar o arquivo.");
+        }
+        finally{
+            if (bw != null) { bw.close(); }
+            if (f != null) { f.close(); }
         }
     }
-
 }
