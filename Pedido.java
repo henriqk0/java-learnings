@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Pedido {
+public class Pedido implements Comparable<Pedido> {
     private String cod; 
     private Aluno cliente;
     private Aluno entregador;
@@ -10,6 +10,17 @@ public class Pedido {
     
     public void setEntregue(boolean entregue) {
         this.entregue = entregue;
+    }
+
+    public int compareTo(Pedido p){
+        if (this.carrinho.size() > p.carrinho.size()) return -1; 
+        if (this.carrinho.size() < p.carrinho.size()) return 1;
+
+        if (this.valorTotal() > p.valorTotal()) return -1;
+        if (this.valorTotal() < p.valorTotal()) return 1;
+
+        return 0;
+                
     }
 
     public String getCod() {

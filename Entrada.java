@@ -1,5 +1,11 @@
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -25,6 +31,41 @@ public class Entrada {
             // Caso contrário, vai ler do teclado.
             this.input = new Scanner(System.in).useLocale(Locale.US);
         }
+    }
+
+    private void lerSalvos(Sistema s) {
+        try{
+            FileReader f = new FileReader("dados.txt");
+            BufferedReader br = new BufferedReader(f);
+            String linha, cpf, nome, senha, email;
+
+            // null ou FIM 
+            while ((linha = br.readLine()) != null){
+                if (linha.equals("ADM")) { 
+                    cpf = br.readLine();
+                    nome = br.readLine();
+                    senha = br.readLine();
+                    email = br.readLine();
+                    Admin a = new Admin(cpf, nome, senha, email);
+                    s.addAdmin(a);
+                }
+                if (linha.equals("ALU")) {
+                    cpf = br.readLine();
+                    nome = br.readLine();
+                    senha = br.readLine();
+                    Aluno a = new Aluno(cpf, nome, senha);
+                    s.addAluno(a);
+                }
+            }
+            f.close();
+        } 
+        catch(FileNotFoundException e) {
+            System.out.println("Arquivo inexistente.");
+        }
+        catch(IOException e) {
+            System.out.println("Não foi possível salvar o Aluno");
+        }
+
     }
 
     /**
@@ -74,6 +115,8 @@ public class Entrada {
      * @param s: Objeto a classe Sistema.
      */
     public void menu(Sistema s) {
+        this.lerSalvos(s);
+
         if (s.sistemaVazio()) {
             System.out.println("** Inicializando o sistema **");
             this.cadAdmin(s);
@@ -92,7 +135,6 @@ public class Entrada {
 
             op = this.lerInteiro(msg);
         }
-
     }
 
     /**
@@ -394,7 +436,11 @@ public class Entrada {
      */
     public void listarPedidos(Aluno a, Sistema s) {
         System.out.println("\nPedidos de " + a);
-        for (Pedido p : s.filtrarPedidos(a)) {
+
+        List<Pedido> ordP = s.filtrarPedidos(a);
+        Collections.sort(ordP);
+
+        for (Pedido p : ordP) {
             System.out.println(p);
 
             System.out.println("Produtos:");

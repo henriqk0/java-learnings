@@ -1,4 +1,4 @@
-public class Usuario {
+public abstract class Usuario {
     protected String cpf, nome;
     private String senha;
 
@@ -6,6 +6,10 @@ public class Usuario {
         this.cpf = cpf;
         this.nome = nome;
         this.senha = senha;
+    }
+
+    public String getSenha() {
+        return this.senha;
     }
 
     public boolean validarAcesso(String s) {
