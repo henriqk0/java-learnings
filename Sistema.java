@@ -106,7 +106,7 @@ public class Sistema {
 
     public void listarProdutos() {
         for (Produto p : this.prods) {
-            System.out.println(p + " (QTD: " + p.getQtd() + ")");
+            if (p.getQtd() > 0) { System.out.println(p + " (QTD: " + p.getQtd() + ")"); }
         }
 
     }
@@ -147,6 +147,16 @@ public class Sistema {
         }
         
         return pedidos_do_aluno;
+    }
+
+    public void salvarUsuarios() {
+        List<Usuario> users = new LinkedList<>();
+        users.addAll(this.alunos);
+        users.addAll(this.adms);  
+
+        for (Usuario u : users) {
+
+        }
     }
 
 }

@@ -23,10 +23,9 @@ public class Aluno extends Usuario implements Salvavel{
             b.newLine();
             b.write(this.getSenha());
             b.newLine();
-            b.close();
-            throw new Exception();
         } catch(Exception e) {
-            System.out.println("Não foi possível salvar o Aluno");
+            System.out.println("Não foi possível salvar o Aluno: " + e);
+            throw e;
         }
     }
 

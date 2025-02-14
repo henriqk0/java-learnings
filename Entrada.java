@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -27,7 +26,7 @@ public class Entrada {
     public Entrada() {
         try {
             // Se houver um arquivo input.txt na pasta corrente, o Scanner vai ler dele.
-            this.input = new Scanner(new FileInputStream("input.txt")).useLocale(Locale.US);
+            this.input = new Scanner(new FileInputStream("input2.txt")).useLocale(Locale.US);
             // NAO ALTERE A LOCALICAÇÃO DO ARQUIVO!!
         } catch (FileNotFoundException e) {
             // Caso contrário, vai ler do teclado.
@@ -59,13 +58,14 @@ public class Entrada {
                     s.addAluno(a);
                 }
             }
+            br.close();
             f.close();
         } 
         catch(FileNotFoundException e) {
             System.out.println("Arquivo inexistente.");
         }
         catch(IOException e) {
-            System.out.println("Não foi possível salvar o Aluno");
+            System.out.println("Não foi possível salvar Usuários");
         }
 
     }
@@ -82,8 +82,16 @@ public class Entrada {
         String linha = this.input.nextLine();
 
         // Ignora linhas começando com #, que vão indicar comentários no arquivo de entrada:
-        while (linha.charAt(0) == '#') linha = this.input.nextLine();
-        return linha;
+        while (true) {
+            try {
+                while (linha.charAt(0) == '#') linha = this.input.nextLine();
+                return linha;
+            } catch (Exception e) {
+                System.out.println("Erro. Você não inseriu uma entrada válida");
+                System.out.print(msg);
+                linha = this.input.nextLine();
+            }
+        }
     }
 
     /**
@@ -94,7 +102,15 @@ public class Entrada {
     private int lerInteiro(String msg) {
         // Imprime uma mensagem ao usuário, lê uma linha contendo um inteiro e retorna este inteiro
         String linha = this.lerLinha(msg);
-        return Integer.parseInt(linha);
+        while (true){
+            try {
+                int num = Integer.parseInt(linha);
+                return num;
+            } catch (NumberFormatException e) {
+                System.out.println("Erro. Número inválido.");
+                linha = this.lerLinha(msg);
+            }
+        }
     }
 
     /**
@@ -105,7 +121,15 @@ public class Entrada {
     private double lerDouble(String msg) {
         // Imprime uma mensagem ao usuário, lê uma linha contendo um ponto flutuante e retorna este número
         String linha = this.lerLinha(msg);
-        return Double.parseDouble(linha);
+        while (true) {
+            try {
+                Double num = Double.parseDouble(linha);
+                return num;
+            } catch (NumberFormatException e) {
+                System.out.println("Erro. Número inválido.");
+                linha = this.lerLinha(msg);
+            }
+        } 
     }
 
     /**********************/
@@ -144,7 +168,7 @@ public class Entrada {
      * @param a: Objeto a classe Admin.
      * @param s: Objeto a classe Sistema.
     */
-    public void menu(Admin a, Sistema s) throws IOException {
+    public void menu(Admin a, Sistema s)  {
         String msg = "\n*********************\n" +
                 "Escolha uma opção:\n" +
                 "1) Cadastrar novo administrador.\n" +
@@ -156,8 +180,20 @@ public class Entrada {
         int op = this.lerInteiro(msg);
 
         while (op != 0) {
-            if (op == 1) { cadAdmin(s); }
-            if (op == 2) { cadAluno(s); }
+            if (op == 1) { 
+                try {
+                    cadAdmin(s);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } 
+            }
+            if (op == 2) { 
+                try {
+                    cadAluno(s);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             if (op == 3) { cadProduto(s); }
             if (op == 4) { cadSala(s); }
             if (op < 0 || op > 4) System.out.println("Opção inválida. Tente novamente: ");
@@ -242,9 +278,19 @@ public class Entrada {
         Admin a = new Admin(cpf, nome, senha, email);
         s.addAdmin(a);
 
-        FileWriter f = new FileWriter("salvos.txt", true);
-        BufferedWriter br = new BufferedWriter(f);
-        a.salvarArq(br);
+        FileWriter f = null;
+        BufferedWriter bw = null; 
+        try {
+            f = new FileWriter("dados.txt", true);
+            bw = new BufferedWriter(f);
+            a.salvarArq(bw);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            if (bw != null) { bw.close(); }
+            if (f != null) { f.close(); }
+        }
 
         System.out.println("Usuário " + a + " criado com sucesso.");
     }
@@ -253,7 +299,7 @@ public class Entrada {
      * Lê os dados de um novo aluno e cadastra-o no sistema.
      * @param s: Um objeto da classe Sistema
      */
-    public void cadAluno(Sistema s) throws IOException {
+    public void cadAluno(Sistema s) throws Exception {
         System.out.println("\n** Cadastrando um novo aluno **\n");
         String cpf = this.lerLinha("Digite o cpf: ");
 
@@ -267,9 +313,19 @@ public class Entrada {
         Aluno a = new Aluno(cpf, nome, senha);
         s.addAluno(a);
 
-        FileWriter f = new FileWriter("salvos.txt", true);
-        BufferedWriter br = new BufferedWriter(f);
-        a.salvarArq(br);
+        FileWriter f = null;
+        BufferedWriter bw = null; 
+        try {
+            f = new FileWriter("dados.txt", true);
+            bw = new BufferedWriter(f);
+            a.salvarArq(bw);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            if (bw != null) { bw.close(); }
+            if (f != null) { f.close(); }
+        }
         
         System.out.println("Usuário " + a + " criado com sucesso.");
     }
@@ -283,12 +339,10 @@ public class Entrada {
         String nome = this.lerLinha("Digite o nome do produto: ");
 
         // criar um loop infinito em nome ?
-
         while (s.getNomeProduto(nome) != null) {
             nome = this.lerLinha("Já existe um produto com este nome. Escolha outro nome: ");
         }
 
-        // possíveis exceptions:
         Integer qtd = this.lerInteiro("Digite a quantidade em estoque: ");
         Double valor = this.lerDouble("Digite o valor unitário do produto: ");        
 

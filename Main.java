@@ -9,5 +9,7 @@ public class Main {
         Entrada e = new Entrada();
 
         e.menu(s);
+
+        // salvar todos os os alunos e adms depois de tudo.
     }
 }

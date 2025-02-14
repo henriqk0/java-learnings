@@ -16,7 +16,6 @@ public class Item implements Comparable<Item> {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
         return p.getCod() + ": " + p.getNome() + " (QTD: " + this.getQtd() + ")";
     }
 
