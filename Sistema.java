@@ -165,11 +165,11 @@ public class Sistema {
             users.addAll(this.adms);  
 
             for (Usuario u : users) {
-                if (u instanceof Aluno) {
-                    ((Aluno)u).salvarArq(bw);;
+                if (u instanceof Admin) {
+                    ((Admin)u).salvarArq(bw);
                 }
                 else {
-                    ((Admin)u).salvarArq(bw);
+                    ((Aluno)u).salvarArq(bw);;
                 }
             }
             bw.write("FIM");
