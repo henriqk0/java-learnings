@@ -103,11 +103,17 @@ public class Entrada {
         while (true){
             try {
                 int num = Integer.parseInt(linha);
+                if (num < 0) {
+                    throw new NaoNegativosException("Erro. O número não pode ser negativo.");
+                }
                 return num;
             } catch (NumberFormatException e) {
                 System.out.println("Erro. Digite somente um número.");
                 linha = this.lerLinha(msg);
-            } 
+            } catch (NaoNegativosException e) {
+                System.out.println(e.getMessage());
+                linha = this.lerLinha(msg);
+            }
         }
     }
 
@@ -189,7 +195,7 @@ public class Entrada {
             if (op == 2) { cadAluno(s); }
             if (op == 3) { cadProduto(s); }
             if (op == 4) { cadSala(s); }
-            if (op < 0 || op > 4) System.out.println("Opção inválida. Tente novamente: ");
+            if (op > 4) System.out.println("Opção inválida. Tente novamente: ");
 
             op = this.lerInteiro(msg);
         }
@@ -390,8 +396,8 @@ public class Entrada {
         }
 
         Integer quantd = this.lerInteiro("Digite a quantidade de " + s.getProduto(cod) + " no pedido: ");
-        while (quantd <= 0) {
-            System.out.println("Não se pode pedir uma quantidade nula ou negativa.");
+        while (quantd == 0) {
+            System.out.println("Não se pode pedir uma quantidade nula.");
             quantd = this.lerInteiro("Digite a quantidade de " + s.getProduto(cod) + " no pedido: ");
         }
 
