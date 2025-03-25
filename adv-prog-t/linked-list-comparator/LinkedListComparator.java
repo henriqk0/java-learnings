@@ -21,6 +21,7 @@ public class LinkedListComparator<T> {
         while (aux != null) {
             s += aux.getValue();
             if (aux != this.last) { s+= ","; }
+            aux = aux.getNext();
         }
         return (s+"]");
 
