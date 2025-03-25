@@ -26,6 +26,53 @@ public class LinkedListComparator<T> {
 
     }
 
+    public boolean hasElement(T element) {
+        NodeGenerics<T> aux = this.first;
+        while (aux!=null) {
+            if (aux.getValue().equals(element)) return true;
+            aux = aux.getNext();
+        } 
+        return false;
+    }
+
+    public T getElementIfExists(T element) {
+        NodeGenerics<T> aux = this.first;
+        while (aux!=null) {
+            if (aux.getValue().equals(element)) return aux.value;
+            aux = aux.getNext();
+        } 
+        return null;
+    }
+
+    public boolean excludeElement(T element) {
+        NodeGenerics<T> aux = this.first;
+        NodeGenerics<T> prev = null;
+        while (aux != null) {
+            if (aux.getValue().equals(element)) {
+                if (aux == this.first) {
+                    this.first = this.first.getNext();
+                    if (aux == this.last) {
+                        this.last = null;
+                    }
+                }
+                else {
+                    prev.setNext(aux.getNext());
+                    if (aux == this.last) {
+                        this.last = prev;
+                    }
+                }
+
+                this.length--;
+                return true;
+            }
+            else {
+                prev = aux;
+                aux = aux.getNext();
+            }
+        }
+        return false; 
+    }
+
     public void insertElemOrdered(T element) { 
         NodeGenerics<T> newElement = new NodeGenerics<T>(element);
         NodeGenerics<T> actual, previous;  
