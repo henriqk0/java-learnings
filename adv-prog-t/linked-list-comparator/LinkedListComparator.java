@@ -92,7 +92,7 @@ public class LinkedListComparator<T> {
                 this.last = newElement;
             }
             else if (previous == null) { 
-                newElement.setProximo(this.first);
+                newElement.setNext(this.first);
                 this.first = newElement;
             }
             else {
