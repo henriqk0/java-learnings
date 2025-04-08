@@ -1,9 +1,12 @@
+package student;
+
+
 public class Student {
     public int reg;
     public String name;
-    public int score;
+    public float score;
 
-    public Student(int reg, String name, int score) {
+    public Student(int reg, String name, float score) {
         this.reg = reg;
         this.name = name;
         this.score = score;
@@ -40,11 +43,11 @@ public class Student {
         this.name = name;
     }
 
-    public int getScore() {
+    public float getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(float score) {
         this.score = score;
     }
 }

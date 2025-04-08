@@ -1,3 +1,9 @@
+import linkedlists.LinkedListComparator;
+import student.Student;
+import student.StudentNameComparator;
+import student.StudentRegistrationComparator;
+
+
 public class Application {
     public static void main(String[] args) {
         LinkedListComparator<Student> nameOrdList = new LinkedListComparator<>(true, new StudentNameComparator());

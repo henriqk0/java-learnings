@@ -1,3 +1,6 @@
+package linkedlists;
+
+
 public class NodeGenerics<T> {
     public T value;
     public NodeGenerics<T> next;

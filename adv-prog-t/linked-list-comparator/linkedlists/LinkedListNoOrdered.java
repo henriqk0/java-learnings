@@ -1,17 +1,14 @@
-import java.util.Comparator;
+package linkedlists;
 
-public class LinkedListComparator<T> {
+
+public class LinkedListNoOrdered<T> {
     private NodeGenerics<T> first;
     private NodeGenerics<T> last;
     private int length;
-    private final boolean ordered;
-    private Comparator<T> comparator; 
 
-    public LinkedListComparator(boolean itsOrdered, Comparator<T> comparator){ 
+    public LinkedListNoOrdered(){ 
         this.first = this.last = null;
         this.length = 0;
-        this.ordered = itsOrdered;
-        this.comparator = comparator;
     }
 
     @Override
@@ -28,9 +25,8 @@ public class LinkedListComparator<T> {
     }
 
     public boolean hasElement(T element) {
-        if (this.last.getValue().equals(element)) return true;
-
         NodeGenerics<T> aux = this.first;
+
         while (aux!=null) {
             if (aux.getValue().equals(element)) return true;
             aux = aux.getNext();
@@ -79,33 +75,13 @@ public class LinkedListComparator<T> {
         return false; 
     }
 
-    public void insertElemOrdered(T element) { 
+    public void insertElem(T element) { 
+        // insert like a queue
         NodeGenerics<T> newElement = new NodeGenerics<T>(element);
-        NodeGenerics<T> actual, previous;  
-        actual = this.first;
-        previous = null;
-
-        if (this.first == null) {
-            this.first = this.last = newElement;
-        }
-        else {
-            while (actual != null && comparator.compare(actual.getValue(), element) < 0){
-                previous = actual;
-                actual = actual.getNext();
-            }
-            if (actual == null) {
-                this.last.setNext(newElement);
-                this.last = newElement;
-            }
-            else if (previous == null) { 
-                newElement.setNext(this.first);
-                this.first = newElement;
-            }
-            else {
-                previous.setNext(newElement);
-                newElement.setNext(actual);
-            }
-        }
+        this.last.setNext(newElement);
+        this.last = newElement;
         ++this.length;
     }
 }
+
+   
