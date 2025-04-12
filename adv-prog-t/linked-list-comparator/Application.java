@@ -3,11 +3,21 @@ import student.Student;
 import student.StudentNameComparator;
 import student.StudentRegistrationComparator;
 import filegenerators.LeitorArquivos; 
-import view.Menu;
+
 
 public class Application {
     public static void main(String[] args) {
-        Menu.exibir();
+        // LinkedListComparator<Student> nameOrdList = new LinkedListComparator<>(true, new StudentNameComparator());
+        
+        LinkedListComparator<Student> regOrdList = LeitorArquivos.populateListOrdered();
+        // Student s1 = new Student(1, "Iohannes", 50);
+        // Student s2 = new Student(2, "Ambrosius", 58);
+        // nameOrdList.insertElemOrdered(s1);
+        // nameOrdList.insertElemOrdered(s2);
+        // regOrdList.insertElemOrdered(s1);
+        // regOrdList.insertElemOrdered(s2);
+        // System.out.println("Ordered list by name: " + nameOrdList);
+        System.out.println("Ordered list by registration: " + regOrdList);
     }
 
 }
