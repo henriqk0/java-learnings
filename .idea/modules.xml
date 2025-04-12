@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/adv-prog-t/adv-prog-t.iml" filepath="$PROJECT_DIR$/adv-prog-t/adv-prog-t.iml" />
-      <module fileurl="file://$PROJECT_DIR$/java-learnings.iml" filepath="$PROJECT_DIR$/java-learnings.iml" />
-    </modules>
-  </component>
-</project>
