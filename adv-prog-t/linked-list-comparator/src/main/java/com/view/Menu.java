@@ -38,7 +38,7 @@ public class Menu {
         start = Instant.now();
         LinkedListComparator<Student> orderedList = new LinkedListComparator<Student>(true, new StudentRegistrationComparator());
         orderedList = LeitorArquivos.populateListOrdered();
-        end = Instant.now();
+        end = Instant.now(); // contar o  tempo com o sem a criação da lista e separadamente para cada uma delas (?)
         timeBetween =  Duration.between(start, end).toMillis() / 1000.0;
         System.out.printf("%.3f segundos para inicializar a lista ordenada.\n", timeBetween);
 
