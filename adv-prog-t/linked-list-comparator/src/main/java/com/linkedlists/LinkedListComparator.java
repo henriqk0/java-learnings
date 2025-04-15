@@ -40,7 +40,8 @@ public class LinkedListComparator<T> {
         return false;
     }
 
-    public T getElementIfExists(T element) {
+    // get element if exists
+    public T pesquisar(T element) {
         if (this.last.getValue().equals(element)) return this.last.getValue();
 
         NodeGenerics<T> aux = this.first;
@@ -81,7 +82,8 @@ public class LinkedListComparator<T> {
         return false; 
     }
 
-    public void insertElemOrdered(T element) { 
+    // insert element method
+    public void adicionar(T element) { 
         NodeGenerics<T> newElement = new NodeGenerics<T>(element);
         NodeGenerics<T> actual, previous;  
         actual = this.first;

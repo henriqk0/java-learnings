@@ -12,6 +12,12 @@ public class Student {
         this.score = score;
     }
 
+    public Student(int reg) {
+        this.reg = reg;
+        this.name = "Default";
+        this.score = 0;
+    }
+
     @Override
     public String toString() {
         return this.reg + " - " + this.name;

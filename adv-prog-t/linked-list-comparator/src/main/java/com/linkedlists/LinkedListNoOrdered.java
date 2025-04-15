@@ -34,7 +34,8 @@ public class LinkedListNoOrdered<T> {
         return false;
     }
 
-    public T getElementIfExists(T element) {
+    // get element if exists
+    public T pesquisar(T element) {
         if (this.last.getValue().equals(element)) return this.last.getValue();
 
         NodeGenerics<T> aux = this.first;
@@ -75,11 +76,18 @@ public class LinkedListNoOrdered<T> {
         return false; 
     }
 
-    public void insertElem(T element) { 
+    // insert method
+    public void adicionar(T element) { 
         // insert like a queue
         NodeGenerics<T> newElement = new NodeGenerics<T>(element);
-        this.last.setNext(newElement);
-        this.last = newElement;
+        if (this.length == 0) { 
+            this.first = newElement;
+            this.last = newElement;
+        }
+        else {
+            this.last.setNext(newElement);
+            this.last = newElement;
+        }
         ++this.length;
     }
 }

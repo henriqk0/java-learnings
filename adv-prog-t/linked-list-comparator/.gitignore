@@ -17,3 +17,6 @@ mvnw.cmd
 
 # Ignore temporary files
 *.tmp
+
+# Ignore txt files
+*.txt

@@ -28,7 +28,7 @@ public class LeitorArquivos {
                 float nota = Float.parseFloat(partes[2]);
                 
                 Student s = new Student(id, nome, nota);
-                regOrdList.insertElemOrdered(s);
+                regOrdList.adicionar(s);
             }
         } catch (IOException e) {
             System.err.println("Erro ao ler o arquivo: " + e.getMessage());
@@ -38,7 +38,7 @@ public class LeitorArquivos {
         return regOrdList;
     }
 
-    public LinkedListNoOrdered<Student> populateListNoOrdered() {
+    public static LinkedListNoOrdered<Student> populateListNoOrdered() {
         LinkedListNoOrdered<Student> noOrdList = new LinkedListNoOrdered<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO))) {
             int numRegistros = Integer.parseInt(reader.readLine().trim());
@@ -52,7 +52,7 @@ public class LeitorArquivos {
                 float nota = Float.parseFloat(partes[2]);
                 
                 Student s = new Student(id, nome, nota);
-                noOrdList.insertElem(s);
+                noOrdList.adicionar(s);
             }
         } catch (IOException e) {
             System.err.println("Erro ao ler o arquivo: " + e.getMessage());
