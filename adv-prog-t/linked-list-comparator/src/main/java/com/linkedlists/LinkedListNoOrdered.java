@@ -1,4 +1,4 @@
-package linkedlists;
+package com.linkedlists;
 
 
 public class LinkedListNoOrdered<T> {

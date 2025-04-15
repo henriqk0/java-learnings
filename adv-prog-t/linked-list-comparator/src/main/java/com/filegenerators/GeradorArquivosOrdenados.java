@@ -1,4 +1,4 @@
-package filegenerators;
+package com.filegenerators;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

@@ -1,13 +1,13 @@
-package filegenerators;
+package com.filegenerators;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import linkedlists.LinkedListComparator;
-import linkedlists.LinkedListNoOrdered;
-import student.Student;
-import student.StudentRegistrationComparator;
+import com.linkedlists.LinkedListComparator;
+import com.linkedlists.LinkedListNoOrdered;
+import com.student.Student;
+import com.student.StudentRegistrationComparator;
 
 
 public class LeitorArquivos {
