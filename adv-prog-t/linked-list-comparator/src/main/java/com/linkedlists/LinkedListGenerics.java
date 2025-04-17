@@ -1,14 +1,23 @@
 package com.linkedlists;
+import java.util.Comparator;
 
 
-public class LinkedListNoOrdered<T> {
+public class LinkedListGenerics<T> {
     private NodeGenerics<T> first;
     private NodeGenerics<T> last;
     private int length;
+    private final boolean ordered;
+    private Comparator<T> comparator; 
 
-    public LinkedListNoOrdered(){ 
+    public LinkedListGenerics(boolean itsOrdered, Comparator<T> comparator){ 
         this.first = this.last = null;
         this.length = 0;
+        this.ordered = itsOrdered;
+        this.comparator = comparator;
+    }
+
+    public boolean isOrdered() {
+        return ordered;
     }
 
     @Override
@@ -21,12 +30,12 @@ public class LinkedListNoOrdered<T> {
             aux = aux.getNext();
         }
         return (s+"]");
-
     }
 
     public boolean hasElement(T element) {
-        NodeGenerics<T> aux = this.first;
+        if (this.isOrdered() && this.last.getValue().equals(element)) return true;
 
+        NodeGenerics<T> aux = this.first;
         while (aux!=null) {
             if (aux.getValue().equals(element)) return true;
             aux = aux.getNext();
@@ -36,7 +45,7 @@ public class LinkedListNoOrdered<T> {
 
     // get element if exists
     public T pesquisar(T element) {
-        if (this.last.getValue().equals(element)) return this.last.getValue();
+        if (this.isOrdered() && this.last.getValue().equals(element)) return this.last.getValue();
 
         NodeGenerics<T> aux = this.first;
         while (aux!=null) {
@@ -76,20 +85,47 @@ public class LinkedListNoOrdered<T> {
         return false; 
     }
 
-    // insert method
+    // insert element method
     public void adicionar(T element) { 
-        // insert like a queue
         NodeGenerics<T> newElement = new NodeGenerics<T>(element);
-        if (this.length == 0) { 
-            this.first = newElement;
-            this.last = newElement;
-        }
-        else {
-            this.last.setNext(newElement);
-            this.last = newElement;
+
+        if (this.isOrdered()) {
+            NodeGenerics<T> actual, previous;  
+            actual = this.first;
+            previous = null;
+
+            if (this.first == null) {
+                this.first = this.last = newElement;
+            }
+            else {
+                while (actual != null && comparator.compare(actual.getValue(), element) < 0){
+                    previous = actual;
+                    actual = actual.getNext();
+                }
+                if (actual == null) {
+                    this.last.setNext(newElement);
+                    this.last = newElement;
+                }
+                else if (previous == null) { 
+                    newElement.setNext(this.first);
+                    this.first = newElement;
+                }
+                else {
+                    previous.setNext(newElement);
+                    newElement.setNext(actual);
+                }
+            }
+        } else {
+            // insert like a queue
+            if (this.length == 0) { 
+                this.first = newElement;
+                this.last = newElement;
+            }
+            else {
+                this.last.setNext(newElement);
+                this.last = newElement;
+            }
         }
         ++this.length;
     }
 }
-
-   

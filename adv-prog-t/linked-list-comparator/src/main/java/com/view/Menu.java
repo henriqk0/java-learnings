@@ -6,10 +6,8 @@ import java.time.Duration;
 import java.time.Instant;
 
 import com.filegenerators.LeitorArquivos;
-import com.linkedlists.LinkedListComparator;
-import com.linkedlists.LinkedListNoOrdered;
+import com.linkedlists.LinkedListGenerics;
 import com.student.Student;
-import com.student.StudentRegistrationComparator;
 
 public class Menu {
     public static void show() {
@@ -27,22 +25,18 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         Instant start, end;
         long timeBetween;
-        LinkedListNoOrdered<Student> noOrderedList = new LinkedListNoOrdered<>();
-        LinkedListComparator<Student> orderedList = new LinkedListComparator<Student>(true, new StudentRegistrationComparator());
 
         start = Instant.now();
-        noOrderedList = LeitorArquivos.populateListNoOrdered();
+        LinkedListGenerics<Student> noOrderedList = LeitorArquivos.populateList(false);
         end = Instant.now();
         timeBetween =  Duration.between(start, end).toNanos();
         System.out.printf("%d nanosegundos para inicializar a lista nao ordenada.\n", timeBetween );
 
-
         start = Instant.now();
-        orderedList = LeitorArquivos.populateListOrdered();
+        LinkedListGenerics<Student> orderedList = LeitorArquivos.populateList(true);
         end = Instant.now(); 
         timeBetween = Duration.between(start, end).toNanos();
         System.out.printf("%d nanosegundos para inicializar a lista ordenada.\n", timeBetween);
-
 
         Menu.show();        
         int mat;
