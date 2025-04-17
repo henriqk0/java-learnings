@@ -14,7 +14,8 @@ import com.student.StudentRegistrationComparator;
 public class Menu {
     public static void show() {
         System.out.println(
-            "Escreva o numero de uma opcao:\n" +
+            "\n##################################" +
+            "\nEscreva o numero de uma opcao:\n" +
             "1) Pesquisar na lista nao ordenada\n" +
             "2) Pesquisar na lista ordenada \n" +
             "3) Sair \n" +
@@ -25,22 +26,22 @@ public class Menu {
     public static void run() {
         Scanner scanner = new Scanner(System.in);
         Instant start, end;
-        double timeBetween;
+        long timeBetween;
         LinkedListNoOrdered<Student> noOrderedList = new LinkedListNoOrdered<>();
-        
+        LinkedListComparator<Student> orderedList = new LinkedListComparator<Student>(true, new StudentRegistrationComparator());
+
         start = Instant.now();
         noOrderedList = LeitorArquivos.populateListNoOrdered();
         end = Instant.now();
-        timeBetween =  Duration.between(start, end).toMillis() / 1000.0;
-        System.out.printf("%.3f segundos para inicializar a lista nao ordenada.\n", timeBetween );
+        timeBetween =  Duration.between(start, end).toNanos();
+        System.out.printf("%d nanosegundos para inicializar a lista nao ordenada.\n", timeBetween );
 
 
         start = Instant.now();
-        LinkedListComparator<Student> orderedList = new LinkedListComparator<Student>(true, new StudentRegistrationComparator());
         orderedList = LeitorArquivos.populateListOrdered();
-        end = Instant.now(); // contar o  tempo com o sem a criação da lista e separadamente para cada uma delas (?)
-        timeBetween =  Duration.between(start, end).toMillis() / 1000.0;
-        System.out.printf("%.3f segundos para inicializar a lista ordenada.\n", timeBetween);
+        end = Instant.now(); 
+        timeBetween = Duration.between(start, end).toNanos();
+        System.out.printf("%d nanosegundos para inicializar a lista ordenada.\n", timeBetween);
 
 
         Menu.show();        
@@ -60,15 +61,15 @@ public class Menu {
                     start = Instant.now();
                     studentWithMat = noOrderedList.pesquisar(existenceMatriculationTest);
                     end = Instant.now();
-                    timeBetween =  Duration.between(start, end).toMillis() / 1000.0;
-                    System.out.printf("%.3f segundos para pesquisar na lista nao ordenada.\n", timeBetween);
+                    timeBetween =  Duration.between(start, end).toNanos();
+                    System.out.printf("%d nanosegundos para pesquisar na lista nao ordenada.\n", timeBetween);
                 }
                 else { 
                     start = Instant.now();
                     studentWithMat = orderedList.pesquisar(existenceMatriculationTest);
                     end = Instant.now();
-                    timeBetween =  Duration.between(start, end).toMillis() / 1000.0;
-                    System.out.printf("%.3f segundos para pesquisar na lista ordenada.\n", timeBetween);
+                    timeBetween =  Duration.between(start, end).toNanos();
+                    System.out.printf("%d nanosegundos para pesquisar na lista ordenada.\n", timeBetween);
                 }
 
                 if (studentWithMat != null)  {
