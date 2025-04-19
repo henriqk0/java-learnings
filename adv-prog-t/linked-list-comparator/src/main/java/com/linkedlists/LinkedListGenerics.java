@@ -1,6 +1,8 @@
 package com.linkedlists;
 import java.util.Comparator;
 
+import com.student.Student;
+
 
 public class LinkedListGenerics<T> {
     private NodeGenerics<T> first;
@@ -43,16 +45,32 @@ public class LinkedListGenerics<T> {
         return false;
     }
 
-    // get element if exists
-    public T pesquisar(T element) {
-        if (this.isOrdered() && this.last.getValue().equals(element)) return this.last.getValue();
+    // searches element in ordered list
+    public T pesquisarOrdenado(T element) {
+        if (comparator.compare(this.last.getValue(), element) < 0) return null;
 
         NodeGenerics<T> aux = this.first;
-        while (aux!=null) {
-            if (aux.getValue().equals(element)) return aux.value;
+        while (aux!=null && comparator.compare(aux.getValue(), element) <= 0) {
+            if (comparator.compare(aux.getValue(), element) == 0) return aux.value;
             aux = aux.getNext();
         } 
         return null;
+    }
+
+    // searches element in unordered list
+    public T pesquisarNaoOrdenado(T element) {
+        NodeGenerics<T> aux = this.first;
+        while (aux!=null) {
+            if (comparator.compare(aux.getValue(), element) == 0) return aux.value;
+            aux = aux.getNext();
+        } 
+        return null;
+    }
+
+    // get element if exists
+    public T pesquisar(T element) {
+        if (this.isOrdered()) return this.pesquisarOrdenado(element);
+        return this.pesquisarNaoOrdenado(element);
     }
 
     public boolean excludeElement(T element) {
@@ -85,46 +103,55 @@ public class LinkedListGenerics<T> {
         return false; 
     }
 
-    // insert element method
-    public void adicionar(T element) { 
+    public void adicionarOrdenado(T element) { 
         NodeGenerics<T> newElement = new NodeGenerics<T>(element);
 
-        if (this.isOrdered()) {
-            NodeGenerics<T> actual, previous;  
-            actual = this.first;
-            previous = null;
+        NodeGenerics<T> actual, previous;  
+        actual = this.first;
+        previous = null;
 
-            if (this.first == null) {
-                this.first = this.last = newElement;
+        if (this.first == null) {
+            this.first = this.last = newElement;
+        }
+        else {
+            while (actual != null && comparator.compare(actual.getValue(), element) < 0){
+                previous = actual;
+                actual = actual.getNext();
             }
-            else {
-                while (actual != null && comparator.compare(actual.getValue(), element) < 0){
-                    previous = actual;
-                    actual = actual.getNext();
-                }
-                if (actual == null) {
-                    this.last.setNext(newElement);
-                    this.last = newElement;
-                }
-                else if (previous == null) { 
-                    newElement.setNext(this.first);
-                    this.first = newElement;
-                }
-                else {
-                    previous.setNext(newElement);
-                    newElement.setNext(actual);
-                }
-            }
-        } else {
-            // insert like a queue
-            if (this.length == 0) { 
-                this.first = newElement;
-                this.last = newElement;
-            }
-            else {
+            if (actual == null) {
                 this.last.setNext(newElement);
                 this.last = newElement;
             }
+            else if (previous == null) { 
+                newElement.setNext(this.first);
+                this.first = newElement;
+            }
+            else {
+                previous.setNext(newElement);
+                newElement.setNext(actual);
+            }
+        }
+    }
+
+    public void adicionarNaoOrdenado(T element) { 
+        NodeGenerics<T> newElement = new NodeGenerics<T>(element);
+
+        if (this.length == 0) { 
+            this.first = newElement;
+            this.last = newElement;
+        }
+        else {
+            this.last.setNext(newElement);
+            this.last = newElement;
+        }
+    }
+
+    // insert element method
+    public void adicionar(T element) { 
+        if (this.isOrdered()) {
+            adicionarOrdenado(element);
+        } else {
+            adicionarNaoOrdenado(element);
         }
         ++this.length;
     }

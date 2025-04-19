@@ -13,8 +13,8 @@ public class LeitorArquivos {
     private static final String NOME_ARQUIVO = "alunosOrdenados.txt";
     
     public static LinkedListGenerics<Student> populateList(boolean itsOrdered) {
-        LinkedListGenerics<Student> studentList = new LinkedListGenerics<>(itsOrdered, null);
-        if (itsOrdered) { studentList = new LinkedListGenerics<>(itsOrdered, new StudentRegistrationComparator()); }
+        LinkedListGenerics<Student> studentList = new LinkedListGenerics<>(itsOrdered, new StudentRegistrationComparator());
+        //if (itsOrdered) { studentList = new LinkedListGenerics<>(itsOrdered, new StudentRegistrationComparator()); }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO))) {
             int numRegistros = Integer.parseInt(reader.readLine().trim());
