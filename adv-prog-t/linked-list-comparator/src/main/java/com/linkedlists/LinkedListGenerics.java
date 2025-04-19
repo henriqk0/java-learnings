@@ -1,9 +1,6 @@
 package com.linkedlists;
 import java.util.Comparator;
 
-import com.student.Student;
-
-
 public class LinkedListGenerics<T> {
     private NodeGenerics<T> first;
     private NodeGenerics<T> last;
