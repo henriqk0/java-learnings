@@ -17,7 +17,7 @@ public class Menu {
             "1) Pesquisar na lista nao ordenada\n" +
             "2) Pesquisar na lista ordenada \n" +
             "3) Sair \n" +
-            "-->"
+            "--> "
         );
     }
 
