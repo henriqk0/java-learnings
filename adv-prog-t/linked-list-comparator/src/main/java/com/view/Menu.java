@@ -11,13 +11,13 @@ import com.student.Student;
 
 public class Menu {
     public static void show() {
-        System.out.println(
+        System.out.print(
             "\n##################################" +
             "\nEscreva o numero de uma opcao:\n" +
             "1) Pesquisar na lista nao ordenada\n" +
             "2) Pesquisar na lista ordenada \n" +
             "3) Sair \n" +
-            "->"
+            "-->"
         );
     }
 
