@@ -1,9 +1,13 @@
 package com;
+import com.view.AutoRun;
 import com.view.Menu;
 
 
 public class Application {
     public static void main(String[] args) {
-        Menu.run();
+        boolean useAutoTests = true;
+
+        if (useAutoTests) { AutoRun.runTests(); }
+        else { Menu.run();}
     }
 }

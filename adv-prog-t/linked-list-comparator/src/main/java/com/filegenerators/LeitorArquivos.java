@@ -14,7 +14,6 @@ public class LeitorArquivos {
     
     public static LinkedListGenerics<Student> populateList(boolean itsOrdered) {
         LinkedListGenerics<Student> studentList = new LinkedListGenerics<>(itsOrdered, new StudentRegistrationComparator());
-        //if (itsOrdered) { studentList = new LinkedListGenerics<>(itsOrdered, new StudentRegistrationComparator()); }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO))) {
             int numRegistros = Integer.parseInt(reader.readLine().trim());

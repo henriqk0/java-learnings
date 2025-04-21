@@ -43,13 +43,13 @@ public class GeradorArquivosOrdenados{
         gerarArquivo();
     }
     
-    private static void gerarArquivo() {
+    public static boolean gerarArquivo(int numRegistros){ 
         Random random = new Random();
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(NOME_ARQUIVO, StandardCharsets.UTF_8))) {
-            writer.write(NUM_REGISTROS + "\n");
+            writer.write(numRegistros + "\n");
             
-            for (int i = 1; i <= NUM_REGISTROS; i++) {
+            for (int i = 1; i <= numRegistros; i++) {
                 String nome = gerarNomeAleatorio(random);
                 float nota = random.nextFloat() * 10; // Gera uma nota entre 0 e 10
                 writer.write(i + ";" + nome + ";" + String.format("%.2f", nota).replace(',', '.') + "\n");
@@ -62,6 +62,13 @@ public class GeradorArquivosOrdenados{
         } catch (IOException e) {
             System.err.println("Erro ao escrever no arquivo: " + e.getMessage());
         }
+
+        return true;
+    }
+
+    private static boolean gerarArquivo() {
+        int numRegistros = NUM_REGISTROS;
+        return gerarArquivo(numRegistros);
     }
     
     private static String gerarNomeAleatorio(Random random) {

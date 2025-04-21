@@ -44,9 +44,13 @@ public class LinkedListGenerics<T> {
 
     // searches element in ordered list
     public T pesquisarOrdenado(T element) {
-        if (comparator.compare(this.last.getValue(), element) < 0) return null;
+        NodeGenerics<T> aux = this.last;
+        if (comparator.compare(aux.getValue(), element) < 0) return null;
 
-        NodeGenerics<T> aux = this.first;
+        else if (comparator.compare(aux.getValue(), element) == 0) return aux.value;
+
+        else aux = this.first;
+
         while (aux!=null && comparator.compare(aux.getValue(), element) <= 0) {
             if (comparator.compare(aux.getValue(), element) == 0) return aux.value;
             aux = aux.getNext();
