@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib;
+package com.lib;
 
 import java.util.Comparator;
 
@@ -19,9 +19,6 @@ import java.util.Comparator;
  * @param <T>
  */
 public interface IArvoreBinaria<T> {
-    
-    
-    
     /**
      * Método para adicionar um elemento à árvore.
      * @param novoValor - Elemento do Tipo T a ser armazenado na árvore.

@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib;
+package com.lib;
 
 /**
  *
  * @author victoriocarvalho
  */
-public class NoExemplo<T> {
+public class No<T> {
     
     private T valor;
-    private NoExemplo<T> filhoDireita;
-    private NoExemplo<T> filhoEsquerda;
+    private No<T> filhoDireita;
+    private No<T> filhoEsquerda;
 
     
-    public NoExemplo(T valor){
+    public No(T valor){
         this.valor = valor;
         this.filhoDireita = null;
         this.filhoEsquerda = null;
@@ -39,28 +39,28 @@ public class NoExemplo<T> {
     /**
      * @return the filhoDireita
      */
-    public NoExemplo<T> getFilhoDireita() {
+    public No<T> getFilhoDireita() {
         return filhoDireita;
     }
 
     /**
      * @param filhoDireita the filhoDireita to set
      */
-    public void setFilhoDireita(NoExemplo<T> filhoDireita) {
+    public void setFilhoDireita(No<T> filhoDireita) {
         this.filhoDireita = filhoDireita;
     }
 
     /**
      * @return the filhoEsquerda
      */
-    public NoExemplo<T> getFilhoEsquerda() {
+    public No<T> getFilhoEsquerda() {
         return filhoEsquerda;
     }
 
     /**
      * @param filhoEsquerda the filhoEsquerda to set
      */
-    public void setFilhoEsquerda(NoExemplo<T> filhoEsquerda) {
+    public void setFilhoEsquerda(No<T> filhoEsquerda) {
         this.filhoEsquerda = filhoEsquerda;
     }
     

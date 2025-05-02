@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app;
+package com.app;
 //Ajuste esse importe para que importe sua classe de Árvore binária
-import lib.ArvoreBinariaExemplo;
+import lib.ArvoreBinaria;
 import lib.IArvoreBinaria;
 
 /**

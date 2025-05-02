@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib;
+package com.lib;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -53,11 +53,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     }
 
     @Override
-    public T pesquisar(T valor, Comparator<T> comparador) {
+    public T pesquisar(T valor, Comparator comparador) {
         return pesquisarRecursivo(this.raiz, valor, comparador);
     }
 
-    private T pesquisarRecursivo(No<T> raiz, T valor, Comparator<T> comparador){
+    private T pesquisarRecursivo(No<T> raiz, T valor, Comparator comparador){
         if (raiz == null) {
             return null;
         }
