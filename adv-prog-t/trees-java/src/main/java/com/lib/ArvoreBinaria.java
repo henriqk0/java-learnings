@@ -1,10 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.  * To change this template file, choose Tools | Templates * and open the template in the editor.
  */
 package com.lib;
 
+import java.util.Stack;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -74,6 +73,12 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public T remover(T valor) {
+        if (raiz == null) {
+            return null;
+        }
+        else if (this.comparador.compare(raiz.getValor(), valor) == 0) {
+            
+        }
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -91,17 +96,57 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     @Override
     public int quantidadeNos() {
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String caminharEmNivel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
+        String valoresFinais = "";
+        if (this.raiz == null) {
+            return valoresFinais;
+        }
+
+        Stack<No<T>> stack = new Stack<>();
+        stack.push(this.raiz);
+
+        while (stack.isEmpty() == false) {
+            No<T> auxNo = stack.peek();
+            stack.pop();
+            valoresFinais += auxNo.getValor();
+
+            if (auxNo.getFilhoDireita() != null) {
+                stack.push(auxNo.getFilhoDireita());
+            }
+            if (auxNo.getFilhoEsquerda() != null) {
+                stack.push(auxNo.getFilhoEsquerda());
+            }
+        }
+        return valoresFinais;
+
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
     }
-    
+
     @Override
     public String caminharEmOrdem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
+        String valoresFinais = "";
+        Stack<No<T>> stack = new Stack<>();
+
+        No<T> auxNo = this.raiz;
+
+        while (auxNo != null || stack.empty() == false) {
+            while (auxNo != null) {
+                stack.push(auxNo);
+                auxNo = auxNo.getFilhoEsquerda();
+            }
+            auxNo = stack.peek();
+            stack.pop();
+
+            valoresFinais = valoresFinais + auxNo.getValor();
+
+            auxNo = auxNo.getFilhoDireita();
+        }
+        return valoresFinais;
     }
         
 }
