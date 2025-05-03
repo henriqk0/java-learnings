@@ -96,8 +96,29 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     @Override
     public int quantidadeNos() {
+        int quantidade = 0;
+        if (this.raiz == null) {
+            return quantidade;
+        }
+
+        Stack<No<T>> stack = new Stack<>();
+        stack.push(this.raiz);
+
+        while (stack.isEmpty() == false) {
+            No<T> auxNo = stack.peek();
+            stack.pop();
+            quantidade += 1;
+
+            if (auxNo.getFilhoDireita() != null) {
+                stack.push(auxNo.getFilhoDireita());
+            }
+            if (auxNo.getFilhoEsquerda() != null) {
+                stack.push(auxNo.getFilhoEsquerda());
+            }
+        }
+        return quantidade;
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
