@@ -76,11 +76,65 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         if (raiz == null) {
             return null;
         }
-        else if (this.comparador.compare(raiz.getValor(), valor) == 0) {
-            
+
+        No<T> auxNoTeste = this.raiz;
+        No<T> auxNoAnterior = auxNoTeste;
+
+        while (auxNoTeste != null) { 
+            if (this.comparador.compare(auxNoTeste.getValor(), valor) == 0)  {
+
+                if (auxNoTeste.getFilhoDireita() != null || auxNoTeste.getFilhoEsquerda() != null) {
+
+                    if (auxNoTeste.getFilhoDireita() != null && auxNoTeste.getFilhoEsquerda() != null) { 
+                        No<T> auxNoSucessorInOrd = auxNoTeste.getFilhoEsquerda();
+
+                        while (true) { 
+                            if (auxNoSucessorInOrd.getFilhoDireita() != null) {
+                                auxNoSucessorInOrd = auxNoSucessorInOrd.getFilhoDireita();
+                            }
+                            else { break; }
+                        }
+                        auxNoSucessorInOrd.setFilhoDireita(auxNoTeste.getFilhoDireita());
+                    }
+
+                    else { 
+                        if (auxNoTeste.getFilhoEsquerda() != null) {
+                            if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
+                                auxNoAnterior.setFilhoDireita(auxNoTeste.getFilhoEsquerda());
+                            }
+                            else if (auxNoAnterior.getFilhoEsquerda() == auxNoTeste) {
+                                auxNoAnterior.setFilhoEsquerda(auxNoTeste.getFilhoEsquerda());
+                            }
+                            auxNoTeste.setFilhoEsquerda(null);
+                        }
+                        else {
+                            if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
+                                auxNoAnterior.setFilhoDireita(auxNoTeste.getFilhoDireita());
+                            }
+                            else if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
+                                auxNoAnterior.setFilhoEsquerda(auxNoTeste.getFilhoDireita());
+                            }
+                            auxNoTeste.setFilhoDireita(null);
+                        }
+                    }
+                }
+                auxNoTeste = null;
+                return valor;
+            }
+
+            else {
+                if (this.comparador.compare(auxNoTeste.getValor(), valor) < 0) {
+                    auxNoAnterior = auxNoTeste;
+                    auxNoTeste = auxNoTeste.getFilhoEsquerda();
+                }
+                else {
+                    auxNoAnterior = auxNoTeste;
+                    auxNoTeste = auxNoTeste.getFilhoDireita();
+                }
+            }
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private T removerRecursivo(No<T> raiz, T valor) {
