@@ -92,32 +92,39 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
                             auxNoSucessorInOrd = auxNoSucessorInOrd.getFilhoDireita();
                         }
                         auxNoSucessorInOrd.setFilhoDireita(auxNoTeste.getFilhoDireita());
+
+                        if (auxNoAnterior == auxNoTeste) {this.raiz = auxNoSucessorInOrd;} // removendo o nó da raiz da árvore
+                        else { // removendo um nó de uma subarvore
+                            if (auxNoAnterior.getFilhoDireita() == auxNoTeste) { // o no a ser removido estava à direita do no anterior
+                                 auxNoAnterior.setFilhoDireita(auxNoSucessorInOrd); }
+                            else { auxNoAnterior.setFilhoEsquerda(auxNoSucessorInOrd); } // '' '' '' '' '' à esquerda do no anterior
+                        }
                     }
 
                     else {
-                        if (auxNoAnterior != auxNoTeste) { // nó a ser removido com apenas um filho e não é o nó da raiz 
-                            if (auxNoTeste.getFilhoEsquerda() != null) {
-                                if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
-                                    auxNoAnterior.setFilhoDireita(auxNoTeste.getFilhoEsquerda());
-                                }
-                                else if (auxNoAnterior.getFilhoEsquerda() == auxNoTeste) {
-                                    auxNoAnterior.setFilhoEsquerda(auxNoTeste.getFilhoEsquerda());
-                                }
-                                auxNoTeste.setFilhoEsquerda(null);
+                        if (auxNoAnterior != auxNoTeste) { // nó a ser removido com apenas um filho e não é o nó da raiz da árvore
+                            if (auxNoAnterior.getFilhoDireita() == auxNoTeste) { // o no removido estava à direita do no anterior
+                                auxNoAnterior.setFilhoDireita(auxNoTeste.getFilhoEsquerda());
+                                auxNoTeste.setFilhoDireita(null);  // tira a referencia do ponteiro do no removido
                             }
-                            else {
-                                if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
-                                    auxNoAnterior.setFilhoDireita(auxNoTeste.getFilhoDireita());
-                                }
-                                else if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
-                                    auxNoAnterior.setFilhoEsquerda(auxNoTeste.getFilhoDireita());
-                                }
-                                auxNoTeste.setFilhoDireita(null);
+                            else if (auxNoAnterior.getFilhoEsquerda() == auxNoTeste) {  // '' '' '' '' '' à esquerda do no anterior
+                                auxNoAnterior.setFilhoEsquerda(auxNoTeste.getFilhoEsquerda());
+                                auxNoTeste.setFilhoEsquerda(null); // tira a referencia do ponteiro do no removido
                             }
                         } 
+                        else { // no a ser removido era a raiz da arvore e tinha apenas um filho
+                            if (auxNoTeste.getFilhoEsquerda() != null) { // sendo um filho à esquerda
+                                this.raiz = auxNoTeste.getFilhoEsquerda(); // obtem a nova raiz
+                                auxNoTeste.setFilhoEsquerda(null); // tira a referencia do ponteiro do no removido
+                            }
+                            else { // sendo um filho à direita 
+                                this.raiz = auxNoTeste.getFilhoDireita(); // obtem a nova raiz
+                                auxNoTeste.setFilhoDireita(null);  // tira a referencia do ponteiro do no removido 
+                            }
+                        }
                     }
                 }
-                auxNoTeste = null;
+                auxNoTeste = null; // "desaloca o no removido"
                 return valor;
             }
 
