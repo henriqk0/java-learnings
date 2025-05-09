@@ -79,7 +79,7 @@ public class GeradorDeArvores {
     }
     
     /**
-     * Método que gera um "nome complerp" de aluno (com nome e sobrenome) aleatoriamente
+     * Método que gera um "nome completo" de aluno (com nome e sobrenome) aleatoriamente
      * 
      * @return uma string contendo duas palavras aleatorias de pelo menos 3 caracteres cada.
      * A ideia é simular o nome e o sobrenome do aluno.
