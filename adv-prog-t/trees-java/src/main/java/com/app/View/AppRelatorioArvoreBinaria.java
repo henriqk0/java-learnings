@@ -18,6 +18,6 @@ import com.lib.IArvoreBinaria;
  */
 public class AppRelatorioArvoreBinaria {
     public static void main(String[] args) {
-
+        Menu.exibir();
     }
 }
