@@ -4,7 +4,6 @@ import java.util.Random;
 import com.lib.ArvoreBinaria;
 
 public class GerenciadorDeProcessos {
-    private ArvoreBinaria<Processo> arvoreProcessos;
     final Random rand = new Random();
 
     private static final String[] PREFIXOS = {
@@ -40,10 +39,11 @@ public class GerenciadorDeProcessos {
 
     public static void main(String[] args) {
         ArvoreBinaria<Processo> arvoreProcessos = new ArvoreBinaria<>(new ComparadorProcessoPorCPU());
+        GerenciadorDeProcessos gerenciador = new GerenciadorDeProcessos();
         int numProcessos = 1000; // Número de processos a serem gerados
         
         for (int i = 0; i < numProcessos; i++) {
-            Processo processo = new GerenciadorDeProcessos().gerarProcesso(i);
+            Processo processo = gerenciador.gerarProcesso(i);
             System.out.println("Processo ID: " + processo.getId() + ", Nome: " + processo.getNome() +
                     ", Uso CPU: " + processo.getUsoCPU() + "%, Uso Memória: " + processo.getUsoMemoria() + "GB");
             arvoreProcessos.adicionar(processo);
