@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app;
+package com.app.View;
 //Lembre-se de ajustar os imports!!!!!
+import com.app.Model.Aluno;
+import com.app.Comparators.ComparadorAlunoPorMatricula;
+import com.app.Generators.GeradorDeArvores;
 import com.lib.ArvoreAVLExemplo;
 import com.lib.ArvoreBinaria;
 import com.lib.IArvoreBinaria;

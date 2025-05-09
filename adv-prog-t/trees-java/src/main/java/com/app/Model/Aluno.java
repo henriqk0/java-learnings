@@ -1,4 +1,4 @@
-package com.app;
+package com.app.Model;
 
 /**
  * Essa é a classe Aluno que será utilizada como tipo do conteúdo das árvores nos 

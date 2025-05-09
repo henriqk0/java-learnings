@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app;
+package com.app.Generators;
 
 import java.util.Random;
 //Ajuste este import para que sua classe de Arvore Binária seja importada
-import com.lib.ArvoreBinaria;
+import com.app.Model.Aluno;
 //Aqui estou importando a interface IArvoreBinaria, a mesma que sua classe de Árvore Binaria deve implementar
 import com.lib.IArvoreBinaria;
 
@@ -100,7 +100,7 @@ public class GeradorDeArvores {
      */
     
 //---Este é o método citado na questão 4 do primeiro relatório
-    public void geraArvoreDegenerada(int n, IArvoreBinaria<Aluno> arv){ 
+    public void geraArvoreDegenerada(int n, IArvoreBinaria<Aluno> arv){
         //inicio matricula com o valor da constante matriculaBase
         int i,matricula= matriculaBase;
         String nome;

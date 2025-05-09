@@ -1,4 +1,6 @@
-package com.app;
+package com.app.Comparators;
+
+import com.app.Model.Aluno;
 
 import java.util.Comparator;
 

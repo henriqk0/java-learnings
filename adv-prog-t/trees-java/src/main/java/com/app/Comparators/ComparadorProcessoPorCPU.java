@@ -1,4 +1,6 @@
-package com.app;
+package com.app.Comparators;
+import com.app.Model.Processo;
+
 import java.util.Comparator;
 
 public class ComparadorProcessoPorCPU implements Comparator<Processo> {
