@@ -7,14 +7,11 @@ package com.app;
 
 import java.util.Random;
 //Ajuste este import para que sua classe de Arvore Binária seja importada
-import lib.ArvoreBinaria;
+import com.lib.ArvoreBinaria;
 //Aqui estou importando a interface IArvoreBinaria, a mesma que sua classe de Árvore Binaria deve implementar
-import lib.IArvoreBinaria;
+import com.lib.IArvoreBinaria;
 
 /**
- *
- * @author victoriocarvalho
- * 
  * Esta classe é utilizada nos programas de teste para gerar árvores balanceadas ou degeneradas
  */
 public class GeradorDeArvores {

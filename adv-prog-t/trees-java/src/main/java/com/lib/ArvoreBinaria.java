@@ -6,10 +6,6 @@ package com.lib;
 import java.util.Stack;
 import java.util.Comparator;
 
-/**
- *
- * @author victoriocarvalho
- */
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     protected No<T> raiz = null;

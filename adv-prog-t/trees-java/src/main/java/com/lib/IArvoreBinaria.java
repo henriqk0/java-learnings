@@ -8,9 +8,6 @@ package com.lib;
 import java.util.Comparator;
 
 /**
- *
- * @author victoriocarvalho
- * 
  * É um requisito do trabalho que sua classe ArvoreBinária implemente esta interface!
  * Com isso garantiremos que você implementou todos os métodos obrigatórios e que 
  * conseguirá rodar o programa de teste para redigir o relatório.

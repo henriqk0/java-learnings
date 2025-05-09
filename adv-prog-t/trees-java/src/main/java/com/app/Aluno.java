@@ -1,9 +1,6 @@
-package app;
+package com.app;
 
 /**
- *
- * @author victoriocarvalho
- * 
  * Essa é a classe Aluno que será utilizada como tipo do conteúdo das árvores nos 
  * programas de teste para redigir os relatórios.
  */

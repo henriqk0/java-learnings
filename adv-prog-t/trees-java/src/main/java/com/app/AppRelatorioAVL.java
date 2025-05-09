@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package app;
+package com.app;
 //Lembre-se de ajustar os imports!!!!!
-import lib.ArvoreAVLExemplo;
-import lib.ArvoreBinariaExemplo;
-import lib.IArvoreBinaria;
+import com.lib.ArvoreAVLExemplo;
+import com.lib.ArvoreBinaria;
+import com.lib.IArvoreBinaria;
 
 /**
- *
- * @author victoriocarvalho
- * 
  * Classe principal do aplicativo a ser utilizado para fazer o relatório do trabalho 
  * de árvore AVL
  */
@@ -27,7 +24,7 @@ public class AppRelatorioAVL {
         gerador.geraArvoreDegenerada(100, arv);
         System.out.println("Árvore AVL Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
-        arv = new ArvoreBinariaExemplo(comparador);
+        arv = new ArvoreBinaria(comparador);
         gerador.geraArvoreDegenerada(100, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
@@ -36,7 +33,7 @@ public class AppRelatorioAVL {
         gerador.geraArvoreDegenerada(1000, arv);
         System.out.println("Árvore AVL Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
-        arv = new ArvoreBinariaExemplo(comparador);
+        arv = new ArvoreBinaria(comparador);
         gerador.geraArvoreDegenerada(1000, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
@@ -45,7 +42,7 @@ public class AppRelatorioAVL {
         gerador.geraArvoreDegenerada(10000, arv);
         System.out.println("Árvore AVL Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
-        arv = new ArvoreBinariaExemplo(comparador);
+        arv = new ArvoreBinaria(comparador);
         gerador.geraArvoreDegenerada(10000, arv);
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
