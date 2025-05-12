@@ -1,12 +1,13 @@
 
 # Relatório - Análise da Aplicação AppRelatorioArvoreBinaria
 
-## 📅 Data: [Insira a data do relatório]
-## 👨‍💻 Autor(es): [Insira o(s) nome(s) do(s) autor(es)]
+## Autor(es): Guilherme Borges Cabral, Henrique de Souza Lima, Miguel Rabelo Wagner e Gabriel Barbosa Lucas
+
+
 
 ---
 
-## 📌 1. Topologia das Árvores Criadas pelo Método `geraArvoreDegenerada`
+## 1. Topologia das Árvores Criadas pelo Método `geraArvoreDegenerada`
 
 **Descrição da Topologia:**  
 Descreva a estrutura da árvore degenerada e como ela se comporta em termos de balanceamento e distribuição dos nós.
@@ -28,7 +29,7 @@ Exemplo de árvore degenerada com 5 elementos:
 
 ---
 
-## 📌 2. Número de Nós Percorridos em Árvores Degeneradas
+## 2. Número de Nós Percorridos em Árvores Degeneradas
 
 - **Árvore com 100 elementos:** [Insira o número de nós percorridos]
 - **Árvore com 200 elementos:** [Insira o número de nós percorridos]
@@ -39,7 +40,7 @@ Explique o raciocínio utilizado para chegar a esses números, considerando a es
 
 ---
 
-## 📌 3. Complexidade da Busca em Árvores Degeneradas
+## 3. Complexidade da Busca em Árvores Degeneradas
 
 **Ordem de Complexidade:** `O(n)`  
 **Explicação:**  
@@ -47,7 +48,7 @@ A busca em uma árvore degenerada é equivalente a percorrer uma lista encadeada
 
 ---
 
-## 📌 4. Topologia das Árvores Criadas pelo Método `geraArvorePerfeitamenteBalanceada`
+## 4. Topologia das Árvores Criadas pelo Método `geraArvorePerfeitamenteBalanceada`
 
 **Descrição da Topologia:**  
 Explique como a árvore balanceada é estruturada e organizada.  
@@ -65,7 +66,7 @@ Exemplo de árvore balanceada com 7 elementos:
 
 ---
 
-## 📌 5. Número de Nós Percorridos em Árvores Balanceadas
+## 5. Número de Nós Percorridos em Árvores Balanceadas
 
 - **Árvore com 100 elementos:** [Insira o número de nós percorridos]
 - **Árvore com 200 elementos:** [Insira o número de nós percorridos]
@@ -76,7 +77,7 @@ Detalhe como o balanceamento da árvore afeta a quantidade de nós percorridos d
 
 ---
 
-## 📌 6. Complexidade da Busca em Árvores Balanceadas
+## 6. Complexidade da Busca em Árvores Balanceadas
 
 **Ordem de Complexidade:** `O(log n)`  
 **Explicação:**  
@@ -84,7 +85,7 @@ A estrutura balanceada permite que a busca seja realizada de forma binária, red
 
 ---
 
-## 📌 7. Busca por Nome Utilizando `ComparadorAlunoPorNome`
+## 7. Busca por Nome Utilizando `ComparadorAlunoPorNome`
 
 **Número de Nós Percorridos no Pior Caso:** [Insira o valor]  
 **Complexidade da Busca:** `O(n)`  
@@ -93,7 +94,7 @@ Ao utilizar um comparador baseado no nome em uma árvore indexada por matrícula
 
 ---
 
-## 📌 8. Comparação de Complexidade dos Métodos de Geração
+## 8. Comparação de Complexidade dos Métodos de Geração
 
 - **Método `geraArvoreDegenerada`:** `O(n)`
 - **Método `geraArvorePerfeitamenteBalanceada`:** `O(n log n)`
@@ -103,7 +104,7 @@ Explique qual dos métodos é mais eficiente em termos de tempo de execução e 
 
 ---
 
-## 📌 9. Problema na Geração de Árvores com 50.000 Elementos
+## 9. Problema na Geração de Árvores com 50.000 Elementos
 
 **Erro Identificado:** [Descreva o erro, se houver]  
 **Momento do Erro:** [Indique o momento exato em que o erro ocorre]  
@@ -111,7 +112,7 @@ Explique qual dos métodos é mais eficiente em termos de tempo de execução e 
 
 ---
 
-## 📌 10. Requisitos Funcionais e Funcionamento do Aplicativo
+## 10. Requisitos Funcionais e Funcionamento do Aplicativo
 
 **Requisitos Funcionais:**  
 - [Requisito 1]
@@ -123,7 +124,7 @@ Descreva o fluxo geral de execução do aplicativo, destacando as funcionalidade
 
 ---
 
-## 📌 11. Arquitetura da Aplicação
+## 11. Arquitetura da Aplicação
 
 **Estrutura da Aplicação:**  
 - **Pacote de Geradores:** [Descrição da função do pacote]
@@ -135,13 +136,15 @@ Opcional: insira um diagrama UML para ilustrar a estrutura.
 
 ---
 
-## 📌 12. Planilha de Desenvolvimento por Membro do Grupo
+## 12. Planilha de Desenvolvimento por Membro do Grupo
 
 | Membro         | Tarefa                          | Status  |
 |----------------|---------------------------------|---------|
-| [Nome 1]       | Implementação da árvore binária | Concluído |
-| [Nome 2]       | Criação dos métodos de geração  | Em andamento |
-| [Nome 3]       | Implementação dos comparadores  | Concluído |
+| Henrique       | Lib: Implementação da lib da árvore binária | Concluído |
+| Gabriel        | App: Definição de arquitetura e classes | Concluído |
+| Guilherme      | App e Lib: Correção de bugs de implementação   | Concluído |
+| Miguel      | App: Realização de testes de software    | Concluído |
+
 
 ---
 
