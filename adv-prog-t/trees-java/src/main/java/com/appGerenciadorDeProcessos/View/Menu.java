@@ -16,7 +16,8 @@ public class Menu {
             "1) Adicionar um novo processo\n" +
             "2) Remover um processo \n" +
             "3) Pesquisar por um processo \n" +
-            "4) Sair \n" +
+            "4) Visualizar processos \n" +
+            "5) Sair \n" +
             "--> "
         );
     }
@@ -118,6 +119,10 @@ public class Menu {
                     else {
                         System.out.println("Opcao invalida.");
                     }
+                    break;
+                case 4:
+                    System.out.println("Visualizando processos...");
+                    gerenciador.getArvoreProcessos().caminharEmOrdem();
                     break;
                 default:
                     System.out.println("Opcao invalida.");
