@@ -4,6 +4,7 @@
 package com.lib;
 
 import java.util.Stack;
+
 import java.util.Comparator;
 
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
@@ -15,55 +16,107 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         comparador = comp;
     }
     
-    @Override
-    public void adicionar(T novoValor) {
-        No<T> atual = this.raiz;
+    public void adicionar(T valor) {
+        No<T> novo = new No<T>(valor);
 
-        while (atual != null){
-            //Se o valor for igual, também vai para a esquerda
-            if (comparador.compare(novoValor, atual.getValor()) <= 0) {
-                atual = atual.getFilhoEsquerda();
-            }
-            else{
-                atual = atual.getFilhoDireita();
-            }
-        }
-
-        atual = new No<T>(novoValor);
-    }
-
-    @Override
-    public T pesquisar(T valor) {
-        return pesquisarRecursivo(this.raiz, valor);
-    }
-
-    private T pesquisarRecursivo(No<T> raiz, T valor){
-        if (raiz == null || (comparador.compare(raiz.getValor(), valor) == 0)){
-            return raiz.getValor();
-        }
-
-        if (comparador.compare(valor, raiz.getValor()) <= 0) return pesquisarRecursivo(raiz.getFilhoEsquerda(), valor);
-        return pesquisarRecursivo(raiz.getFilhoDireita(), valor);
-    }
-
-    @Override
-    public T pesquisar(T valor, Comparator<T> comparador) {
-        return pesquisarRecursivo(this.raiz, valor, comparador);
-    }
-
-    private T pesquisarRecursivo(No<T> raiz, T valor, Comparator<T> comparador){
+        //Arvore vazia
         if (raiz == null) {
+            raiz = novo;
+            return;
+        }
+
+        No<T> atual = raiz;
+        No<T> pai = null;
+
+        while (atual != null) {
+            pai = atual;
+            int cmp = comparador.compare(valor, atual.getValor());
+
+            if (cmp < 0) {
+                atual = atual.getFilhoEsquerda();
+            } else if (cmp > 0) {
+                atual = atual.getFilhoDireita();
+            } else {
+                // Valor duplicado, não insere
+                return;
+            }
+    }
+
+        // Insere no lado correto do pai
+        int cmpFinal = comparador.compare(valor, pai.getValor());
+        if (cmpFinal < 0) {
+            pai.setFilhoEsquerda(novo);
+        } else {
+            pai.setFilhoDireita(novo);
+        }
+    }
+
+    /*
+    public void adicionar(T valor) {
+        raiz = adicionarRecursivo(raiz, valor);
+    }
+
+    // Método privado recursivo
+    private No<T> adicionarRecursivo(No<T> atual, T valor) {
+        if (atual == null) {
+            return new No<>(valor);
+        }
+
+        if (this.comparador.compare(valor, atual.getValor()) < 0) {
+            atual.setFilhoEsquerda(adicionarRecursivo(atual.getFilhoEsquerda(), valor));
+        } else if (this.comparador.compare(valor, atual.getValor()) > 0) {
+            atual.setFilhoDireita(adicionarRecursivo(atual.getFilhoDireita(), valor));
+        } 
+
+        // se valor for igual, não adiciona (árvore sem duplicados)
+        return atual;
+    }
+    */
+
+    public T pesquisar(T valor) {
+        No<T> encontrado = pesquisarRecursivo(raiz, valor);
+        return encontrado != null ? encontrado.getValor() : null;
+    }
+
+    private No<T> pesquisarRecursivo(No<T> atual, T valor) {
+        if (atual == null) {
             return null;
         }
-        else if (comparador.compare(raiz.getValor(), valor) == 0){
-            return raiz.getValor();
+
+        int cmp = comparador.compare(valor, atual.getValor());
+
+        if (cmp == 0) {
+            return atual;
+        } else if (cmp < 0) {
+            return pesquisarRecursivo(atual.getFilhoEsquerda(), valor);
+        } else {
+            return pesquisarRecursivo(atual.getFilhoDireita(), valor);
+        }
+    }
+
+    /**
+     * Método para pesquisar usando um Comparator diferente (fazendo varredura completa).
+     */
+    public T pesquisar(T valor, Comparator<T> comparadorAlternativo) {
+        No<T> encontrado = pesquisarComComparator(raiz, valor, comparadorAlternativo);
+        return encontrado != null ? encontrado.getValor() : null;
+    }
+
+    private No<T> pesquisarComComparator(No<T> atual, T valor, Comparator<T> comparadorAlt) {
+        if (atual == null) {
+            return null;
         }
 
-        T returnEsq = pesquisarRecursivo(raiz.getFilhoEsquerda(), valor, comparador);
-        if (returnEsq != null){
-            return returnEsq;
+        if (comparadorAlt.compare(valor, atual.getValor()) == 0) {
+            return atual;
         }
-        return pesquisarRecursivo(raiz.getFilhoDireita(), valor, comparador);
+
+        No<T> encontradoEsq = pesquisarComComparator(atual.getFilhoEsquerda(), valor, comparadorAlt);
+        if (encontradoEsq != null) {
+            return encontradoEsq;
+        }
+
+        return pesquisarComComparator(atual.getFilhoDireita(), valor, comparadorAlt);
     }
 
     @Override

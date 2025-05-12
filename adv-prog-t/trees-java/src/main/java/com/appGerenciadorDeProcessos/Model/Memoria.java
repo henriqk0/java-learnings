@@ -18,7 +18,8 @@ public class Memoria {
             Scanner sc = new Scanner(System.in);
             System.out.print("Tamanho da memoria (MB): ");
             instance = new Memoria(sc.nextFloat());
-            sc.close();
+            //Por algum motivo, fechar esse scanner estava dando problema lá no menu
+            //sc.close();
         }
         
         return instance;

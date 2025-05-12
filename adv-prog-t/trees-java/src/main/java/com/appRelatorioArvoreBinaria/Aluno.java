@@ -14,7 +14,6 @@ public class Aluno  {
         this.nome = nome;        
     }
 
-
     public int getMatricula() {
         return matricula;
     }
@@ -31,5 +30,10 @@ public class Aluno  {
         this.nome = nome;
     }
 
-
+    public String toString() {
+        return "Aluno {" +
+                "Matricula: " + matricula +
+                ", Nome: '" + nome + '\'' +
+                '}';
+    }
 }

@@ -45,6 +45,7 @@ public class Menu {
         //Instanciando o gerenciador de processos
         GerenciadorDeProcessos gerenciador = new GerenciadorDeProcessos();
 
+        
         System.out.println("Bem-vindo. Quantos processos deseja gerar?");
         System.out.print("--> ");
         int quantidade_processos = scanner.nextInt();
@@ -54,10 +55,9 @@ public class Menu {
         gerenciador.popularGerenciador(quantidade_processos);
 
         Menu.exibir();
-
         int opcao = scanner.nextInt();
 
-        while (opcao != 4) {
+        while (opcao != 5) {
             switch (opcao) {
                 case 1:
                     System.out.println("Adicionando um novo processo...");
@@ -122,7 +122,7 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Visualizando processos...");
-                    gerenciador.getArvoreProcessos().caminharEmOrdem();
+                    System.out.println(gerenciador.getArvoreProcessos().caminharEmOrdem());
                     break;
                 default:
                     System.out.println("Opcao invalida.");
