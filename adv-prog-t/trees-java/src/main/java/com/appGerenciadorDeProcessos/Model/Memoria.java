@@ -1,4 +1,4 @@
-package com.app.Model;
+package com.appGerenciadorDeProcessos.Model;
 
 import java.util.Scanner;
 
@@ -16,10 +16,11 @@ public class Memoria {
     public static Memoria getInstance(){
         if(instance == null){
             Scanner sc = new Scanner(System.in);
-            System.out.println("Tamanho da memoria: \n");
-            instance = new Memoria(sc.nextDouble());
+            System.out.print("Tamanho da memoria (MB): ");
+            instance = new Memoria(sc.nextFloat());
+            sc.close();
         }
-
+        
         return instance;
     }
 

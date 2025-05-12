@@ -1,13 +1,13 @@
-package com.app.Model;
+package com.appGerenciadorDeProcessos.Model;
 
 
 public class Processo {
     private int id;
     private String nome;
     // Uso de CPU em porcentagem
-    private float usoCPU;
+    private double usoCPU;
     // Uso de memória variando entre 0MB e 16000MB (para permitir o encaixe de mais nós de processo)
-    private float usoMemoria;
+    private double usoMemoria;
 
     public int getId() {
         return id;
@@ -17,20 +17,20 @@ public class Processo {
         return nome;
     }
 
-    public float getUsoCPU() {
+    public double getUsoCPU() {
         return usoCPU;
     }
 
-    public float getUsoMemoria() {
+    public double getUsoMemoria() {
         return usoMemoria;
     }
 
-    public Processo(int id, String nome, float usoCPU, float usoMemoria){
+    public Processo(int id, String nome, double usoCPU, double usoMemoria){
         Memoria m = Memoria.getInstance();
         Cpu c = Cpu.getInstance();
         try {
             m.setAvailableSize(usoMemoria);
-            c.setAvailableAmount(usoMemoria);
+            c.setAvailableAmount(usoCPU);
             this.id = id;
             this.nome = nome;
             this.usoCPU = usoCPU;
@@ -40,4 +40,26 @@ public class Processo {
         }
     }
 
+    public Processo(int id){
+        this.id = id;
+    }
+
+     public Processo(String nome){
+        this.nome = nome;
+    }
+
+    public Processo(double usoCPU){
+        this.usoCPU = usoCPU;
+    }
+    
+    @Override
+    public String toString() {
+        return "Processo{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", usoCPU=" + usoCPU +
+                ", usoMemoria=" + usoMemoria +
+                '}';
+    }
+    
 }

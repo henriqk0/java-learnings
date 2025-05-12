@@ -1,6 +1,4 @@
-package com.app.Comparators;
-
-import com.app.Model.Aluno;
+package com.appRelatorioArvoreBinaria;
 
 import java.util.Comparator;
 

@@ -1,4 +1,4 @@
-package com.app.Model;
+package com.appRelatorioArvoreBinaria;
 
 /**
  * Essa é a classe Aluno que será utilizada como tipo do conteúdo das árvores nos 

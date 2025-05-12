@@ -38,7 +38,7 @@ public interface IArvoreBinaria<T> {
      * @param comparador - Comparator a ser utilizado na busca. 
      * @return caso tenha sido encontrado um elemento com o valor buscado, o mesmo será retornado. Caso contrário retorna null.
      */
-    public T pesquisar(T valor, Comparator comparador);
+    public T pesquisar(T valor, Comparator<T> comparador);
  
 
     /**

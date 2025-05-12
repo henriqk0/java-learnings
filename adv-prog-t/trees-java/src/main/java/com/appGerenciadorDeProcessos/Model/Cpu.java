@@ -1,9 +1,9 @@
-package com.app.Model;
+package com.appGerenciadorDeProcessos.Model;
 
 public class Cpu {
 
     //available_amount é um valor em porcentagem p/ representar a % disponível da CPU
-    private static float available_amount = 0;
+    private static double available_amount = 0;
     private static Cpu instance = null;
 
 
@@ -18,8 +18,9 @@ public class Cpu {
         return instance;
     }
 
-    public float getAvailableAmount(){ return available_amount; }
-    public void setAvailableAmount(float use_percentage) throws Exception{
+    public double getAvailableAmount(){ return available_amount; }
+
+    public void setAvailableAmount(double use_percentage) throws Exception{
         if(use_percentage > available_amount){
             throw new Exception("Limite da capacidade da CPU atingida.");
         }else{
