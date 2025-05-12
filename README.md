@@ -115,12 +115,18 @@ Explique qual dos métodos é mais eficiente em termos de tempo de execução e 
 ## 10. Requisitos Funcionais e Funcionamento do Aplicativo
 
 **Requisitos Funcionais:**  
-- [Requisito 1]
-- [Requisito 2]
-- [Requisito 3]
+- Listar Processos em ordem
+- Adicionar Processos 
+- Remover Processos
+- Pesquisar Processos
+- Ordenar Processos com caminhamento Em Ordem
 
-**Funcionamento do Aplicativo:**  
-Descreva o fluxo geral de execução do aplicativo, destacando as funcionalidades principais.
+**Fluxo de execução do Aplicativo:**
+O fluxo de funcionamento do aplicativo se resume aos seguintes passos:
+1. Definir quantidade de processos
+2. Definir quantidade de memória disponível
+3. Escolher 1 das 6 operações ofertadas pela aplicação
+4. Sair da aplicação (caso nenhuma outra opção dentre as 6 primeiras forem escolhidas)
 
 ---
 
