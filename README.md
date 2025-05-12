@@ -127,12 +127,14 @@ Descreva o fluxo geral de execução do aplicativo, destacando as funcionalidade
 ## 11. Arquitetura da Aplicação
 
 **Estrutura da Aplicação:**  
-- **Pacote de Geradores:** [Descrição da função do pacote]
-- **Pacote de Comparadores:** [Descrição da função do pacote]
-- **Pacote de Árvore Binária:** [Descrição da função do pacote]
+- **Model** - Camada de representação das entidades da aplicação
+- **View** - Camada que cuida da visualização dos dados  
+- **Control** - Camada responsável pelo controle e lógica dos dados 
+- **Generator** - Camada com classes geradoras de estruturas
+  
+**Diagrama de Classes:**
+![Diagrama de classes UML](https://github.com/henriqk0/java-learnings/blob/app/imagem_2025-05-12_190437955.png)
 
-**Diagrama de Classes:**  
-Opcional: insira um diagrama UML para ilustrar a estrutura.
 
 ---
 
