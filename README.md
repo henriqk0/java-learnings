@@ -130,7 +130,7 @@ Descreva o fluxo geral de execução do aplicativo, destacando as funcionalidade
 - **Model** - Camada de representação das entidades da aplicação
 - **View** - Camada que cuida da visualização dos dados  
 - **Control** - Camada responsável pelo controle e lógica dos dados 
-- **Generator** - Camada com classes geradoras de estruturas
+- **Comparator** - Pacote que agrupa todos os Comparators do projeto
   
 **Diagrama de Classes:**
 ![Diagrama de classes UML](https://github.com/henriqk0/java-learnings/blob/app/imagem_2025-05-12_190437955.png)
