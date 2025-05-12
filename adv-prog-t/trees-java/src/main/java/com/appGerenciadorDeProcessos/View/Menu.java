@@ -71,7 +71,12 @@ public class Menu {
                     System.out.println("Removendo um processo...");
                     System.out.print("Digite o uso de CPU do processo (sim, isso nao faz sentido): ");
                     double usoCPU = scanner.nextDouble();
-                    gerenciador.getArvoreProcessos().remover(new Processo(usoCPU));
+                    Processo processoRemover = gerenciador.getArvoreProcessos().remover(new Processo(usoCPU));
+                    if(processoRemover == null) {
+                        System.out.println("Processo não encontrado.");
+                    } else {
+                        System.out.println("Processo removido.");
+                    }
                     break;
 
                 case 3:

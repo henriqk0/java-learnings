@@ -51,28 +51,6 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         }
     }
 
-    /*
-    public void adicionar(T valor) {
-        raiz = adicionarRecursivo(raiz, valor);
-    }
-
-    // Método privado recursivo
-    private No<T> adicionarRecursivo(No<T> atual, T valor) {
-        if (atual == null) {
-            return new No<>(valor);
-        }
-
-        if (this.comparador.compare(valor, atual.getValor()) < 0) {
-            atual.setFilhoEsquerda(adicionarRecursivo(atual.getFilhoEsquerda(), valor));
-        } else if (this.comparador.compare(valor, atual.getValor()) > 0) {
-            atual.setFilhoDireita(adicionarRecursivo(atual.getFilhoDireita(), valor));
-        } 
-
-        // se valor for igual, não adiciona (árvore sem duplicados)
-        return atual;
-    }
-    */
-
     public T pesquisar(T valor) {
         No<T> encontrado = pesquisarRecursivo(raiz, valor);
         return encontrado != null ? encontrado.getValor() : null;

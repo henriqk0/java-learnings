@@ -70,7 +70,7 @@ public class GerenciadorDeProcessos {
         // Uso de CPU e memória aleatórios, variando entre 0 e 10% da quantidade disponível
         // a fim de evitar que o uso total ultrapasse 100% dos recursos
         double usoCPU = (rand.nextDouble() * c.getAvailableAmount() * 0.1);
-        usoCPU = Math.round(usoCPU * 10000.0) / 10000.0; // Arredondando para 4 casas decimais
+        usoCPU = Math.round(usoCPU * 100.0) / 10000.0; // Arredondando para 4 casas decimais
         double usoMemoria = (rand.nextDouble() * m.getAvailableSize() * 0.1);
         usoMemoria = Math.round(usoMemoria * 10000.0) / 10000.0; // Arredondando para 4 casas decimais
         
@@ -82,8 +82,12 @@ public class GerenciadorDeProcessos {
     public void popularGerenciador (int numProcessos) {
         for (int i = 0; i < numProcessos; i++) {
             Processo processo = this.gerarProcesso();
-            System.out.printf("Processo ID: %d, Nome: %s, Uso CPU: %.4f %%, Uso Memória: %.4f MB\n", 
-                    processo.getId(), processo.getNome(), processo.getUsoCPU() * 100, processo.getUsoMemoria());
+            /* 
+            System.out.printf("Processo ID: %d, Nome: %s, Uso CPU: %f %%, Uso Memória: %.4f MB\n", 
+                    processo.getId(), processo.getNome(), processo.getUsoCPU(), processo.getUsoMemoria());
+            */
+            System.out.println("Processo ID: " + processo.getId() + ", Nome: " + processo.getNome() + 
+            ", Uso CPU: " + processo.getUsoCPU() + ", Uso Memória: " + processo.getUsoMemoria() + " MB");
             this.arvoreProcessos.adicionar(processo);
             this.quantidadeProcessos++;
         }
