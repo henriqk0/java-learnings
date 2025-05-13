@@ -1,11 +1,18 @@
-package com.appGerenciadorDeProcessos.View;
+package main.java.com.appGerenciadorDeProcessos.View;
 
+//Classes utilitárias
 import java.io.IOException;
 import java.util.Scanner;
 
-import com.appGerenciadorDeProcessos.Comparators.*;
-import com.appGerenciadorDeProcessos.Control.GerenciadorDeProcessos;
-import com.appGerenciadorDeProcessos.Model.Processo;
+//Comparadores
+import main.java.com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorID;
+import main.java.com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorNome;
+
+//Controllers
+import main.java.com.appGerenciadorDeProcessos.Control.GerenciadorDeProcessos;
+
+//Models
+import main.java.com.appGerenciadorDeProcessos.Model.Processo;
 
 public class Menu {
 
@@ -17,7 +24,9 @@ public class Menu {
             "2) Remover um processo \n" +
             "3) Pesquisar por um processo \n" +
             "4) Visualizar processos \n" +
-            "5) Sair \n" +
+            "5) Ver altura \n" +
+            "6) Ver quantidade de nós \n" +
+            "7) Sair \n" +
             "--> "
         );
     }
@@ -45,7 +54,6 @@ public class Menu {
         //Instanciando o gerenciador de processos
         GerenciadorDeProcessos gerenciador = new GerenciadorDeProcessos();
 
-        
         System.out.println("Bem-vindo. Quantos processos deseja gerar?");
         System.out.print("--> ");
         int quantidade_processos = scanner.nextInt();
@@ -57,7 +65,7 @@ public class Menu {
         Menu.exibir();
         int opcao = scanner.nextInt();
 
-        while (opcao != 5) {
+        while (opcao != 7) {
             switch (opcao) {
                 case 1:
                     System.out.println("Adicionando um novo processo...");
@@ -71,12 +79,7 @@ public class Menu {
                     System.out.println("Removendo um processo...");
                     System.out.print("Digite o uso de CPU do processo (sim, isso nao faz sentido): ");
                     double usoCPU = scanner.nextDouble();
-                    Processo processoRemover = gerenciador.getArvoreProcessos().remover(new Processo(usoCPU));
-                    if(processoRemover == null) {
-                        System.out.println("Processo não encontrado.");
-                    } else {
-                        System.out.println("Processo removido.");
-                    }
+                    gerenciador.getArvoreProcessos().remover(new Processo(usoCPU));
                     break;
 
                 case 3:
@@ -129,6 +132,15 @@ public class Menu {
                     System.out.println("Visualizando processos...");
                     System.out.println(gerenciador.getArvoreProcessos().caminharEmOrdem());
                     break;
+
+                case 5:
+                    System.out.println("Altura da arvore: " + gerenciador.getArvoreProcessos().altura());
+                    break;
+
+                case 6:
+                    System.out.println("Quantidade de nos: " + gerenciador.getArvoreProcessos().quantidadeNos());
+                    break;
+
                 default:
                     System.out.println("Opcao invalida.");
             }
