@@ -1,4 +1,4 @@
-package com.lib;
+package main.java.com.lib;
 
 public class TuplaNoAltura<T> {
     private No<T> no;

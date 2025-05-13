@@ -1,4 +1,4 @@
-package com.appGerenciadorDeProcessos.Model;
+package main.java.com.appGerenciadorDeProcessos.Model;
 
 import java.util.Scanner;
 
@@ -18,7 +18,6 @@ public class Memoria {
             Scanner sc = new Scanner(System.in);
             System.out.print("Tamanho da memoria (MB): ");
             instance = new Memoria(sc.nextFloat());
-            sc.close();
         }
         
         return instance;

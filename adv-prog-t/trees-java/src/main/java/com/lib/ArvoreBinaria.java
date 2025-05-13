@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.  * To change this template file, choose Tools | Templates * and open the template in the editor.
  */
-package com.lib;
+package main.java.com.lib;
 
 import java.util.Stack;
 import java.util.Comparator;
@@ -14,10 +14,59 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     public ArvoreBinaria(Comparator<T> comp) {
         comparador = comp;
     }
-    
+
+    public boolean isEmpty() {
+        return raiz == null;
+    }
+
+    public void adicionar(T valor) {
+        No<T> novo = new No<T>(valor);
+
+        //Arvore vazia
+        if (raiz == null) {
+            raiz = novo;
+            return;
+        }
+
+        No<T> atual = raiz;
+        No<T> pai = null;
+
+        while (atual != null) {
+            pai = atual;
+            int cmp = comparador.compare(valor, atual.getValor());
+
+            if (cmp < 0) {
+                atual = atual.getFilhoEsquerda();
+            } else if (cmp > 0) {
+                atual = atual.getFilhoDireita();
+            } else {
+                // Valor duplicado, não insere
+                return;
+            }
+        }
+
+        // Insere no lado correto do pai
+        int cmpFinal = comparador.compare(valor, pai.getValor());
+        if (cmpFinal < 0) {
+            pai.setFilhoEsquerda(novo);
+        } else {
+            pai.setFilhoDireita(novo);
+        }
+    }
+
+
+    /*
     @Override
-    public void adicionar(T novoValor) {
-        No<T> atual = this.raiz;
+    public void adicionar(T valor) {
+        No<T> novoNo = new No<>(valor);
+
+        if(this.raiz == null) {
+            this.raiz = novoNo;
+        }else{
+            this.adicionarRecursivo(this.raiz, novoNo);
+        }
+
+
 
         while (atual != null){
             //Se o valor for igual, também vai para a esquerda
@@ -30,7 +79,33 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         }
 
         atual = new No<T>(novoValor);
+        if(this.isEmpty()){
+            this.raiz = atual;
+        }
+
     }
+    */
+
+    /*
+    public void adicionarRecursivo(No<T> raiz, No<T> noNovo){
+
+        //Se chegar a um nó de valor nulo, insere o nó novo
+        if(raiz == null){
+            raiz = noNovo;
+        }
+        //Caso contrário, continua percorrendo a árvore
+        else{
+            //Se o valor novo for menor ou igual que o valor da sua raiz, insere à esquerda
+            if(comparador.compare(noNovo.getValor(), raiz.getValor()) <= 0){
+                adicionarRecursivo(raiz.getFilhoEsquerda(), noNovo);
+            }
+            //Caso contrário, insere à direita
+            else{
+                adicionarRecursivo(raiz.getFilhoDireita(), noNovo);
+            }
+        }
+    }
+    */
 
     @Override
     public T pesquisar(T valor) {
@@ -179,7 +254,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         Stack<No<T>> stack = new Stack<>();
         stack.push(this.raiz);
 
-        while (stack.isEmpty() == false) {
+        while (!stack.isEmpty()) {
             No<T> auxNo = stack.peek();
             stack.pop();
             quantidade += 1;
@@ -204,7 +279,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         Stack<No<T>> stack = new Stack<>();
         stack.push(this.raiz);
 
-        while (stack.isEmpty() == false) {
+        while (!stack.isEmpty()) {
             No<T> auxNo = stack.peek();
             stack.pop();
             valoresFinais += auxNo.getValor();
@@ -229,7 +304,8 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
         No<T> auxNo = this.raiz;
 
-        while (auxNo != null || stack.empty() == false) {
+
+        while (auxNo != null || !stack.empty()) {
             while (auxNo != null) {
                 stack.push(auxNo);
                 auxNo = auxNo.getFilhoEsquerda();

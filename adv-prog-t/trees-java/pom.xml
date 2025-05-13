@@ -44,6 +44,7 @@
                             <version>1.18.30</version>
                         </path>
                     </annotationProcessorPaths>
+
                 </configuration>
             </plugin>
         </plugins>

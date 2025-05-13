@@ -1,4 +1,4 @@
-package com.appGerenciadorDeProcessos.Model;
+package main.java.com.appGerenciadorDeProcessos.Model;
 
 
 public class Processo {
