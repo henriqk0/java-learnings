@@ -1,4 +1,4 @@
-package com;
+package main.java.com;
 import com.view.AutoRun;
 import com.view.Menu;
 
