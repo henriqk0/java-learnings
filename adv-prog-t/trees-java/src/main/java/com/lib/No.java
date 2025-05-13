@@ -5,10 +5,6 @@
  */
 package com.lib;
 
-/**
- *
- * @author victoriocarvalho
- */
 public class No<T> {
     
     private T valor;

@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.app;
+package com.appRelatorioArvoreBinaria;
 
 import java.util.Random;
-//Ajuste este import para que sua classe de Arvore Binária seja importada
-import lib.ArvoreBinaria;
+
 //Aqui estou importando a interface IArvoreBinaria, a mesma que sua classe de Árvore Binaria deve implementar
-import lib.IArvoreBinaria;
+import com.lib.IArvoreBinaria;
 
 /**
- *
- * @author victoriocarvalho
- * 
  * Esta classe é utilizada nos programas de teste para gerar árvores balanceadas ou degeneradas
  */
 public class GeradorDeArvores {
@@ -82,7 +78,7 @@ public class GeradorDeArvores {
     }
     
     /**
-     * Método que gera um "nome complerp" de aluno (com nome e sobrenome) aleatoriamente
+     * Método que gera um "nome completo" de aluno (com nome e sobrenome) aleatoriamente
      * 
      * @return uma string contendo duas palavras aleatorias de pelo menos 3 caracteres cada.
      * A ideia é simular o nome e o sobrenome do aluno.
@@ -103,7 +99,7 @@ public class GeradorDeArvores {
      */
     
 //---Este é o método citado na questão 4 do primeiro relatório
-    public void geraArvoreDegenerada(int n, IArvoreBinaria<Aluno> arv){ 
+    public void geraArvoreDegenerada(int n, IArvoreBinaria<Aluno> arv){
         //inicio matricula com o valor da constante matriculaBase
         int i,matricula= matriculaBase;
         String nome;

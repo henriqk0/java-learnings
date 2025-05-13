@@ -1,6 +1,5 @@
 package com.lib;
 
-
 public class TuplaNoAltura<T> {
     private No<T> no;
     private int altura;

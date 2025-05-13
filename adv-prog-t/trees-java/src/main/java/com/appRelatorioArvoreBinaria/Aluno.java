@@ -1,9 +1,6 @@
-package app;
+package com.appRelatorioArvoreBinaria;
 
 /**
- *
- * @author victoriocarvalho
- * 
  * Essa é a classe Aluno que será utilizada como tipo do conteúdo das árvores nos 
  * programas de teste para redigir os relatórios.
  */
@@ -16,7 +13,6 @@ public class Aluno  {
         this.matricula = matricula;
         this.nome = nome;        
     }
-
 
     public int getMatricula() {
         return matricula;
@@ -34,5 +30,10 @@ public class Aluno  {
         this.nome = nome;
     }
 
-
+    public String toString() {
+        return "Aluno {" +
+                "Matricula: " + matricula +
+                ", Nome: '" + nome + '\'' +
+                '}';
+    }
 }

@@ -8,9 +8,6 @@ package com.lib;
 import java.util.Comparator;
 
 /**
- *
- * @author victoriocarvalho
- * 
  * É um requisito do trabalho que sua classe ArvoreBinária implemente esta interface!
  * Com isso garantiremos que você implementou todos os métodos obrigatórios e que 
  * conseguirá rodar o programa de teste para redigir o relatório.
@@ -41,7 +38,7 @@ public interface IArvoreBinaria<T> {
      * @param comparador - Comparator a ser utilizado na busca. 
      * @return caso tenha sido encontrado um elemento com o valor buscado, o mesmo será retornado. Caso contrário retorna null.
      */
-    public T pesquisar(T valor, Comparator comparador);
+    public T pesquisar(T valor, Comparator<T> comparador);
  
 
     /**
