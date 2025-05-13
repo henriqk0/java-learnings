@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package main.java.com.appRelatorioArvoreBinaria;
-import main.java.com.lib.ArvoreAVLExemplo;
+import main.java.com.lib.ArvoreAVL;
 import main.java.com.lib.ArvoreBinaria;
 import main.java.com.lib.IArvoreBinaria;
 

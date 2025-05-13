@@ -1,4 +1,4 @@
-package com.linkedlists;
+package main.java.com.linkedlists;
 
 
 public class NodeGenerics<T> {

@@ -1,4 +1,4 @@
-package com.view;
+package main.java.com.view;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 import com.filegenerators.LeitorArquivos;
-import com.linkedlists.LinkedListGenerics;
+import main.java.com.linkedlists.LinkedListGenerics;
 import com.student.Student;
 
 public class Menu {

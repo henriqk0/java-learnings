@@ -59,6 +59,53 @@ public class No<T> {
     public void setFilhoEsquerda(No<T> filhoEsquerda) {
         this.filhoEsquerda = filhoEsquerda;
     }
-    
-    
+
+    private No<T> rotacaoDireita(No<T> raiz){
+        No<T> filho = raiz.getFilhoEsquerda();
+
+        raiz.setFilhoEsquerda(filho.getFilhoDireita());
+        filho.setFilhoDireita(raiz);
+
+        return filho;
+    }
+
+    private No<T> rotacaoEsquerda(No<T> raiz){
+        No<T> filho = raiz.getFilhoDireita();
+        raiz.setFilhoDireita(filho.getFilhoEsquerda());
+        filho.setFilhoEsquerda(raiz);
+
+        return filho;
+    }
+    private No<T> rotacaoEsquerdaDireita(No<T> raiz){
+        raiz.setFilhoEsquerda(this.rotacaoEsquerdaDireita(raiz.getFilhoEsquerda()));
+
+        return this.rotacaoDireita(raiz);
+    }
+    private No<T> rotacaoDireitaEsquerda(No<T> raiz){
+        raiz.setFilhoDireita(this.rotacaoDireitaEsquerda(raiz.getFilhoDireita()));
+
+        return this.rotacaoEsquerda(raiz);
+    }
+
+    public int obterAltura(){ return obterAltura(this);}
+
+    private int obterAltura(No<T> raiz){
+        if(raiz == null){
+            return -1;
+        }
+        else{
+            int hd = this.obterAltura(raiz.getFilhoDireita());
+            int he = this.obterAltura(raiz.getFilhoEsquerda());
+            if(hd>he){
+                return hd+1;
+            }
+            else{
+                return he+1;
+            }
+        }
+    }
+
+    public int fatorBalanceamento(){
+        return this.obterAltura(this.filhoDireita) - this.obterAltura(this.filhoEsquerda);
+    }
 }

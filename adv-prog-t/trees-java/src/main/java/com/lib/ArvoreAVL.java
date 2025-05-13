@@ -1,8 +1,9 @@
 package main.java.com.lib;
 
 import java.util.Comparator;
+import main.java.com.lib.ArvoreBinaria;
 
-public class ArvoreAVL <T> extends ArvoreBinaria<T>{
+public class ArvoreAVL<T> extends ArvoreBinaria<T>{
 
     public ArvoreAVL(Comparator<T> comparator) {
         super(comparator);
