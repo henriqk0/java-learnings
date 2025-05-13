@@ -1,4 +1,4 @@
-package com.appRelatorioArvoreBinaria;
+package main.java.com.appRelatorioArvoreBinaria;
 
 import java.util.Comparator;
 
