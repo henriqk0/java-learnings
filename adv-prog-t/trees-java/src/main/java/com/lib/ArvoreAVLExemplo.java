@@ -39,7 +39,7 @@ public class ArvoreAVLExemplo <T> extends ArvoreBinaria<T>{
             return novoNo;
         }
 
-        // TODO: Debugar
+        // TODO: Debugar (a árvore apontará para a nova raiz, caso mude ??)
         if (comparador.compare(novoNo.getValor(), raiz.getValor()) < 0) {
             raiz.setFilhoEsquerda(adicionarRecursivo(raiz.getFilhoEsquerda(), novoNo));
         } else {
