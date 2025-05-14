@@ -7,42 +7,77 @@ public class ArvoreAVLExemplo <T> extends ArvoreBinaria<T>{
     public ArvoreAVLExemplo(Comparator<T> comparator) {
         super(comparator);
     }
+    
+    public int getFatorBalanceamento(No<T> noRaiz) {
+        int he = getAlturaSubarvore(noRaiz.getFilhoEsquerda());
+        int hd = getAlturaSubarvore(noRaiz.getFilhoDireita());
+        return hd - he;
+    }
+
+    public void checarBalanceamento(No<T> noRaiz) {
+        int fbRaiz = getFatorBalanceamento(raiz);
+        int fbFilhoDireita = getFatorBalanceamento(raiz.getFilhoDireita());
+        int fbFilhoEsquerda = getFatorBalanceamento(raiz.getFilhoEsquerda());
+
+        if (fbRaiz == 2 && fbFilhoDireita > 0) {
+            // rotação à esquerda
+            rotacaoEsquerda(raiz);
+        } else if (fbRaiz == 2 && fbFilhoDireita < 0) {
+            // rotação direita esquerda
+            rotacaoDireitaEsquerda(raiz);
+        } else if (fbRaiz == -2 && fbFilhoEsquerda < 0) {
+            // rotação à direita
+            rotacaoDireita(raiz);
+        } else if (fbRaiz == -2 && fbFilhoEsquerda > 0) { 
+            // rotação esquerda direita
+            rotacaoEsquerdaDireita(raiz);
+        }
+    }
 
     public No<T> adicionarRecursivo(No<T> raiz, No<T> novoNo){
-        if (raiz == NULL) {
-            return no;
+        if (raiz == null) {
+            return novoNo;
         }
 
-        int heRaiz = getAlturaSubarvore(raiz.getFilhoEsquerda());
-        int hdRaiz = getAlturaSubarvore(raiz.getFilhoDireita());
-        int fbRaiz = hdRaiz - heRaiz;
-        
-        int heFilhoDireita = getAlturaSubarvore(raiz.getFilhoDireita().getFilhoEsquerda());
-        int hdFilhoDireita = getAlturaSubarvore(raiz.getFilhoDireita().getFilhoDireita());
-        int fbFilhoDireita = hdFilhoDireita - heFilhoDireita;
-
-        int heFilhoEsquerda = getAlturaSubarvore(raiz.getFilhoEsquerda().getFilhoEsquerda());
-        int hdFilhoEsquerda = getAlturaSubarvore(raiz.getFilhoEsquerda().getFilhoDireita());
-        int fbFilhoEsquerda = hdFilhoEsquerda - heFilhoEsquerda;
-
-        // falta verificações dos fb's e ver se os metodos estao funcionando
-        if (comparator.compare(novoNo.getValor(), raiz.getValor()) < 0) {
+        // TODO: Debugar
+        if (comparador.compare(novoNo.getValor(), raiz.getValor()) < 0) {
             raiz.setFilhoEsquerda(adicionarRecursivo(raiz.getFilhoEsquerda(), novoNo));
         } else {
-            raiz.setFilhoEsquerda(adicionarRecursivo(raiz.getFilhoEsquerda(), novoNo));
+            raiz.setFilhoDireita(adicionarRecursivo(raiz.getFilhoDireita(), novoNo));
         }
+        checarBalanceamento(raiz);
+
+        return raiz;
     }
 
     @Override
     public void adicionar(T valor) { 
-        No<T> novoNo = new No<T>(valor)
-        ArvoreAVLExemplo.adicionarRecursivo(this.raiz, novoNo);       
+        No<T> novoNo = new No<T>(valor);
+        adicionarRecursivo(this.raiz, novoNo);       
     }
     
-    //Implementar métodos para efetuar o balanceamento e sobrescrever método de adicionar elemento...
-    public T rotacaoDireita(No<T> rotac) {
+    public No<T> rotacaoDireita(No<T> rotac) {
         No<T> auxNo = rotac.getFilhoEsquerda();
+        rotac.setFilhoEsquerda(auxNo.getFilhoDireita());
         auxNo.setFilhoDireita(rotac);
+        return auxNo;
+    }
+
+    public No<T> rotacaoEsquerdaDireita(No<T> rotac) {
+        rotac.setFilhoEsquerda(rotacaoEsquerda(rotac.getFilhoEsquerda()));
+        return rotacaoDireita(rotac);
+    }
+
+    public No<T> rotacaoDireitaEsquerda(No<T> rotac) {
+        rotac.setFilhoDireita(rotacaoDireita(rotac.getFilhoDireita()));
+        return rotacaoEsquerda(rotac);
+    }
+
+    public No<T> rotacaoEsquerda(No<T> rotac) {
+        No<T> auxNo = rotac.getFilhoDireita();
+        rotac.setFilhoDireita(auxNo.getFilhoEsquerda());
+        auxNo.setFilhoEsquerda(rotac);
+        return auxNo;
     }
 
     public int getAlturaSubarvore(No<T> no) {
@@ -50,7 +85,7 @@ public class ArvoreAVLExemplo <T> extends ArvoreBinaria<T>{
             return 0;
         }
 
-        ArvoreBinaria<T> subArvore = new ArvoreBinaria<>();
+        ArvoreBinaria<T> subArvore = new ArvoreBinaria<>(comparador);
         subArvore.raiz = no;
 
         return subArvore.altura(); 
