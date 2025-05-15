@@ -183,6 +183,10 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             int alturaNo = auxTuplaNoAltura.getAltura(); 
             No<T> auxNo = auxTuplaNoAltura.getNo();
 
+            if (auxNo == null) { // nó nulo: não faz nada
+                continue;
+            }
+
             if (auxNo.getFilhoDireita() == null && auxNo.getFilhoEsquerda() == null) { // folha encontrada: tira o maximo entre a altura até este no e a ultima maior altura de folha
                 alturaFolhaMax = Math.max(alturaFolhaMax, alturaNo);
             }

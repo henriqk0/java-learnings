@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.appRelatorioArvoreBinaria;
-import com.lib.ArvoreAVLExemplo;
+import com.lib.ArvoreAVL;
 import com.lib.ArvoreBinaria;
 import com.lib.IArvoreBinaria;
 
@@ -19,7 +19,7 @@ public class AppRelatorioAVL {
         ComparadorAlunoPorMatricula comparador = new ComparadorAlunoPorMatricula();
         IArvoreBinaria<Aluno> arv;
 
-        arv = new ArvoreAVLExemplo<Aluno>(comparador);
+        arv = new ArvoreAVL<Aluno>(comparador);
         gerador.geraArvoreDegenerada(100, arv);
         System.out.println("Árvore AVL Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
@@ -28,7 +28,7 @@ public class AppRelatorioAVL {
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
 
-        arv = new ArvoreAVLExemplo<Aluno>(comparador);
+        arv = new ArvoreAVL<Aluno>(comparador);
         gerador.geraArvoreDegenerada(1000, arv);
         System.out.println("Árvore AVL Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
@@ -37,7 +37,7 @@ public class AppRelatorioAVL {
         System.out.println("Árvore Degenerada Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
         
-        arv = new ArvoreAVLExemplo<Aluno>(comparador);
+        arv = new ArvoreAVL<Aluno>(comparador);
         gerador.geraArvoreDegenerada(10000, arv);
         System.out.println("Árvore AVL Criada");
         System.out.println("Quantidade de Nós: " + arv.quantidadeNos()+ " Altura: " + arv.altura());
