@@ -1,10 +1,10 @@
-package com.filegenerators;
+package main.java.com.filegenerators;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import com.linkedlists.LinkedListGenerics;
+import main.java.com.linkedlists.LinkedListGenerics;
 import com.student.Student;
 import com.student.StudentRegistrationComparator;
 

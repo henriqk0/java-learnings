@@ -1,6 +1,6 @@
 package main.java.com;
-import com.view.AutoRun;
-import com.view.Menu;
+import main.java.com.view.AutoRun;
+import main.java.com.view.Menu;
 
 
 public class Application {

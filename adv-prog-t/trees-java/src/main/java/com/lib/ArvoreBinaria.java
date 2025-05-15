@@ -1,7 +1,9 @@
 /*
  * To change this license header, choose License Headers in Project Properties.  * To change this template file, choose Tools | Templates * and open the template in the editor.
  */
-package com.lib;
+package main.java.com.lib;
+
+import main.java.com.lib.IArvoreBinaria;
 
 import java.util.Stack;
 
@@ -10,7 +12,7 @@ import java.util.Comparator;
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     protected No<T> raiz = null;
-    protected Comparator<T> comparador; 
+    protected Comparator<T> comparador;
   
     public ArvoreBinaria(Comparator<T> comp) {
         comparador = comp;
@@ -168,6 +170,23 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         }
         return null;
     }
+
+    /*
+    //Balanceia a arvore de acordo com a quantidade de MB de memoria utilizadas por cada processo
+    public void geraArvorePerfeitamenteBalanceada(double min, double max){
+        //Se o valor da menor qtd. de memoria for menor ou igual ao maior valor é sinal que ainda preciso inserir elementos na árvore
+        //Senão essa recursão acabou...
+        if (min <= max){
+            //Calculo o uso médio de memória  desta geração e insiro um processo com esse valor na árvore
+            double media = (min+max)/2;
+            double valor = media;
+            this.adicionar(valor);
+            //Chamo recursivamente para continuar inserindo os elementos com matrículas menores que a média
+            geraArvorePerfeitamenteBalanceada(min,media-1);
+            //Chamo recursivamente para continuar inserindo os elementos com matrículas maiores que a média
+            geraArvorePerfeitamenteBalanceada(media+1,max);
+        }
+    }*/
 
     @Override
     public int altura() {

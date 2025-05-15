@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import com.filegenerators.LeitorArquivos;
+import main.java.com.filegenerators.LeitorArquivos;
 import com.filegenerators.GeradorArquivosOrdenados;
 import main.java.com.linkedlists.LinkedListGenerics;
 import com.student.Student;

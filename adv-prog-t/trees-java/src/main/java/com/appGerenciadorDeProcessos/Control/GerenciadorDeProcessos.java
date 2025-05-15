@@ -4,7 +4,7 @@ import java.util.Random;
 
 import main.java.com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorCPU;
 import main.java.com.appGerenciadorDeProcessos.Model.Cpu;
-import main.java.com.appGerenciadorDeProcessos.Model.Memoria;
+import com.appGerenciadorDeProcessos.Model.Memoria;
 import main.java.com.appGerenciadorDeProcessos.Model.Processo;
 import main.java.com.lib.ArvoreBinaria;
 
