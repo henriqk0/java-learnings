@@ -91,7 +91,7 @@ public class Menu {
                         System.out.print("Digite o nome do processo: ");
                         String nomePesquisar = scanner.next();
                         Processo processoEncontrado = gerenciador.getArvoreProcessos().
-                        pesquisar(new Processo(nomePesquisar), comparador_nome);
+                                pesquisar(new Processo(nomePesquisar), comparador_nome);
 
                         if (processoEncontrado != null) {
                             System.out.println("Processo encontrado: " + processoEncontrado);
@@ -103,7 +103,7 @@ public class Menu {
                         System.out.print("Digite o ID do processo: ");
                         int idPesquisar = scanner.nextInt();
                         Processo processoEncontrado = gerenciador.getArvoreProcessos().
-                        pesquisar(new Processo(idPesquisar), comparador_id);
+                                pesquisar(new Processo(idPesquisar), comparador_id);
 
                         if (processoEncontrado != null) {
                             System.out.println("Processo encontrado: " + processoEncontrado);
@@ -116,7 +116,7 @@ public class Menu {
                         System.out.print("Digite o uso de CPU do processo (sim, isso nao faz o menor sentido): ");
                         double usoCPUPesquisar = scanner.nextDouble();
                         Processo processoEncontrado = gerenciador.getArvoreProcessos().
-                        pesquisar(new Processo(usoCPUPesquisar));
+                                pesquisar(new Processo(usoCPUPesquisar));
 
                         if (processoEncontrado != null) {
                             System.out.println("Processo encontrado: " + processoEncontrado);
@@ -160,5 +160,6 @@ public class Menu {
             else { System.out.print("\033\143"); }
         } catch (IOException | InterruptedException ex) {}
     }
-        
+
+
 }

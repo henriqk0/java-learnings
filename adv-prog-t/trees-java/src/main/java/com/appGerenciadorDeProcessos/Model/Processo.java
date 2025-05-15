@@ -1,5 +1,5 @@
 package main.java.com.appGerenciadorDeProcessos.Model;
-
+import com.appGerenciadorDeProcessos.Model.Memoria;
 
 public class Processo {
     private int id;
@@ -26,7 +26,7 @@ public class Processo {
     }
 
     public Processo(int id, String nome, double usoCPU, double usoMemoria){
-        Memoria m = Memoria.getInstance();
+        com.appGerenciadorDeProcessos.Model.Memoria m = Memoria.getInstance();
         Cpu c = Cpu.getInstance();
         try {
             m.setAvailableSize(usoMemoria);
