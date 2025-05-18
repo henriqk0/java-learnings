@@ -91,6 +91,67 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
 
         return subArvore.altura(); 
     }
+    
+    public No<T> removeMin(No<T> no){ // `Min` de mínimo, levando em consideração que os elementos à esquerda são menores
+        // remove o sucessor substituindo pelo filho à direita
+        if (no.getFilhoEsquerda() == null) { // já é o elemento mais à esquerda da subarvore
+            return no.getFilhoDireita(); // então, retorna o seu elemento à direita
+        }
+        else {
+            no.setFilhoEsquerda(removeMin(no.getFilhoEsquerda()));
+            checarBalanceamento(no);
+        }
+    }
 
+    public No<T> sucessorAux(No<T> noAux) { 
+        if (noAux.getFilhoEsquerda() == null) { // já é o elemento mais à esquerda da subarvore
+            return noAux.getFilhoDireita(); // então, retorna o seu elemento à direita
+        }
+        else {
+            sucessorAux(noAux.getFilhoEsquerda());
+        }
+    }
+
+    public No<T> removeRec(No<T> no, T valor) {
+        No<T> novaRaizSub = no;
+
+        if (this.comparador.compare(no.getValor(), valor) == 0) {
+            if (no.getFilhoEsquerda == null) {
+                novaRaizSub = no.getFilhoDireita();
+            } else if (no.getFilhoDireita == null) {
+                novaRaizSub = no.getFilhoEsquerda();
+            } 
+            else { // tem dois filhos, devemos checar o balanecamento 
+                novaRaizSub = sucessorAux(no.getFilhoDireita());
+
+                novaRaizSub.setFilhoDireita(removeMin(no.getFilhoDireita()));
+                novaRaizSub.setFilhoEsquerda(no.getFilhoEsquerda());
+            }
+
+            if (this.raiz == no) {this.raiz = novaRaizSub;}
+            no = null;
+        } 
+        else {
+            if (this.comparador.compare(no.getValor(), valor) < 0) {
+                no.setFilhoEsquerda(removeRec(no.getFilhoEsquerda(), valor));
+            }
+            else {
+                no.setFilhoDireita(removeRec(no.getFilhoDireita(), valor));
+            }
+        }
+        // para cada nó empilhado, checamos o balanceamento
+        checarBalanceamento(novaRaizSub);
+    }
+
+    // TODO: debugar a remoção também
+    @Override
+    public T remover(T valor) {
+        if (this.raiz == null) {
+            return null;
+        }
+
+        No<T> auxNoTeste = this.raiz;
+        removeRec(auxNoTeste, valor);
+    }
 
 }
