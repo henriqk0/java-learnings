@@ -18,31 +18,33 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         return hd - he;
     }
 
-    public void checarBalanceamento(No<T> noRaiz) {
-        int fbRaiz = getFatorBalanceamento(raiz);
+    public No<T> checarBalanceamento(No<T> noRaiz) {
+        int fbRaiz = getFatorBalanceamento(noRaiz);
         int fbFilhoDireita = 0;
         int fbFilhoEsquerda = 0;
 
         if (noRaiz.getFilhoDireita() != null){
-            fbFilhoDireita = getFatorBalanceamento(raiz.getFilhoDireita());
+            fbFilhoDireita = getFatorBalanceamento(noRaiz.getFilhoDireita());
         }
         if (noRaiz.getFilhoEsquerda() != null){
-            fbFilhoEsquerda = getFatorBalanceamento(raiz.getFilhoEsquerda());
+            fbFilhoEsquerda = getFatorBalanceamento(noRaiz.getFilhoEsquerda());
         }
 
         if (fbRaiz == 2 && fbFilhoDireita > 0) {
             // rotação à esquerda
-            rotacaoEsquerda(raiz);
+            return rotacaoEsquerda(noRaiz);
         } else if (fbRaiz == 2 && fbFilhoDireita < 0) {
             // rotação direita esquerda
-            rotacaoDireitaEsquerda(raiz);
+            return rotacaoDireitaEsquerda(noRaiz);
         } else if (fbRaiz == -2 && fbFilhoEsquerda < 0) {
             // rotação à direita
-            rotacaoDireita(raiz);
+            return rotacaoDireita(noRaiz);
         } else if (fbRaiz == -2 && fbFilhoEsquerda > 0) { 
             // rotação esquerda direita
-            rotacaoEsquerdaDireita(raiz);
+            return rotacaoEsquerdaDireita(noRaiz);
         }
+
+        return noRaiz;
     }
 
     public No<T> adicionarRecursivo(No<T> raiz, No<T> novoNo){
@@ -50,13 +52,12 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
             return novoNo;
         }
 
-        // TODO: Debugar (a árvore apontará para a nova raiz, caso mude ??)
         if (comparador.compare(novoNo.getValor(), raiz.getValor()) < 0) {
             raiz.setFilhoEsquerda(adicionarRecursivo(raiz.getFilhoEsquerda(), novoNo));
         } else {
             raiz.setFilhoDireita(adicionarRecursivo(raiz.getFilhoDireita(), novoNo));
         }
-        checarBalanceamento(raiz);
+        raiz = checarBalanceamento(raiz);
 
         return raiz;
     }
@@ -71,6 +72,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         No<T> auxNo = rotac.getFilhoEsquerda();
         rotac.setFilhoEsquerda(auxNo.getFilhoDireita());
         auxNo.setFilhoDireita(rotac);
+        
         return auxNo;
     }
 
@@ -88,6 +90,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         No<T> auxNo = rotac.getFilhoDireita();
         rotac.setFilhoDireita(auxNo.getFilhoEsquerda());
         auxNo.setFilhoEsquerda(rotac);
+
         return auxNo;
     }
 
@@ -96,10 +99,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
             return 0;
         }
 
-        ArvoreBinaria<T> subArvore = new ArvoreBinaria<>(comparador);
-        subArvore.raiz = no;
-
-        return subArvore.altura(); 
+        return 1 + Math.max(getAlturaSubarvore(no.getFilhoEsquerda()), getAlturaSubarvore(no.getFilhoDireita()));
     }
     
     /* 

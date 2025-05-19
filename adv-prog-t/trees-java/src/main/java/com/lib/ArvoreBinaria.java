@@ -15,6 +15,10 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         comparador = comp;
     }
     
+    public No<T> getRaiz() {
+        return raiz;
+    }
+
     public void adicionar(T valor) {
         No<T> novo = new No<T>(valor);
 
