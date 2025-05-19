@@ -1,4 +1,4 @@
-package main.java.com.appGerenciadorDeProcessos.View.AVL;
+package com.appGerenciadorDeProcessos.View.AVL;
 
 /*Importando classes de Arvore<T> e Gerenciador de Processos*/
 

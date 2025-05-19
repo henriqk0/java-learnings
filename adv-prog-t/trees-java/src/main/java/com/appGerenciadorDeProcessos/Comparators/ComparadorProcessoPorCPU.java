@@ -1,7 +1,7 @@
-package main.java.com.appGerenciadorDeProcessos.Comparators;
+package com.appGerenciadorDeProcessos.Comparators;
 import java.util.Comparator;
 
-import main.java.com.appGerenciadorDeProcessos.Model.Processo;
+import com.appGerenciadorDeProcessos.Model.Processo;
 
 public class ComparadorProcessoPorCPU implements Comparator<Processo> {
     @Override

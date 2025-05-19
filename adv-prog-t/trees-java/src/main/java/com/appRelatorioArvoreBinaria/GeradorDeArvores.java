@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.appRelatorioArvoreBinaria;
+package com.appRelatorioArvoreBinaria;
 
 import java.util.Random;
 
 //Aqui estou importando a interface IArvoreBinaria, a mesma que sua classe de Árvore Binaria deve implementar
-import main.java.com.lib.IArvoreBinaria;
+import com.lib.IArvoreBinaria;
 
 /**
  * Esta classe é utilizada nos programas de teste para gerar árvores balanceadas ou degeneradas

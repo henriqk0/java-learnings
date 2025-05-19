@@ -1,7 +1,6 @@
-package main.java.com.lib;
+package com.lib;
 
 import java.util.Comparator;
-import main.java.com.lib.ArvoreBinaria;
 
 public class ArvoreAVL<T> extends ArvoreBinaria<T>{
 
@@ -92,6 +91,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         return subArvore.altura(); 
     }
     
+    /* 
     public No<T> removeMin(No<T> no){ // `Min` de mínimo, levando em consideração que os elementos à esquerda são menores
         // remove o sucessor substituindo pelo filho à direita
         if (no.getFilhoEsquerda() == null) { // já é o elemento mais à esquerda da subarvore
@@ -153,5 +153,6 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         No<T> auxNoTeste = this.raiz;
         removeRec(auxNoTeste, valor);
     }
+    */
 
 }

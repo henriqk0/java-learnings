@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.lib;
+package com.lib;
 
 public class No<T> {
     
@@ -76,11 +76,13 @@ public class No<T> {
 
         return filho;
     }
+
     private No<T> rotacaoEsquerdaDireita(No<T> raiz){
         raiz.setFilhoEsquerda(this.rotacaoEsquerdaDireita(raiz.getFilhoEsquerda()));
 
         return this.rotacaoDireita(raiz);
     }
+    
     private No<T> rotacaoDireitaEsquerda(No<T> raiz){
         raiz.setFilhoDireita(this.rotacaoDireitaEsquerda(raiz.getFilhoDireita()));
 

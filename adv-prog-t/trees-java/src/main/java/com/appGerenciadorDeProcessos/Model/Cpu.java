@@ -1,4 +1,4 @@
-package main.java.com.appGerenciadorDeProcessos.Model;
+package com.appGerenciadorDeProcessos.Model;
 
 public class Cpu {
 

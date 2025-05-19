@@ -1,18 +1,18 @@
-package main.java.com.appGerenciadorDeProcessos.View;
+package com.appGerenciadorDeProcessos.View;
 
 //Classes utilitárias
 import java.io.IOException;
 import java.util.Scanner;
 
 //Comparadores
-import main.java.com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorID;
-import main.java.com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorNome;
+import com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorID;
+import com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorNome;
 
 //Controllers
-import main.java.com.appGerenciadorDeProcessos.Control.GerenciadorDeProcessos;
+import com.appGerenciadorDeProcessos.Control.GerenciadorDeProcessos;
 
 //Models
-import main.java.com.appGerenciadorDeProcessos.Model.Processo;
+import com.appGerenciadorDeProcessos.Model.Processo;
 
 public class Menu {
 

@@ -1,4 +1,4 @@
-package main.java.com.appGerenciadorDeProcessos.Model;
+package com.appGerenciadorDeProcessos.Model;
 import com.appGerenciadorDeProcessos.Model.Memoria;
 
 public class Processo {

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.appRelatorioArvoreBinaria;
-import main.java.com.lib.ArvoreAVL;
-import main.java.com.lib.ArvoreBinaria;
-import main.java.com.lib.IArvoreBinaria;
+package com.appRelatorioArvoreBinaria;
+import com.lib.ArvoreAVL;
+import com.lib.ArvoreBinaria;
+import com.lib.IArvoreBinaria;
 
 /**
  * Classe principal do aplicativo a ser utilizado para fazer o relatório do trabalho 

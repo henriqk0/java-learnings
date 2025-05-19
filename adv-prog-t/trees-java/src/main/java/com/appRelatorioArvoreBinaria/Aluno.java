@@ -1,4 +1,4 @@
-package main.java.com.appRelatorioArvoreBinaria;
+package com.appRelatorioArvoreBinaria;
 
 /**
  * Essa é a classe Aluno que será utilizada como tipo do conteúdo das árvores nos 

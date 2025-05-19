@@ -1,12 +1,12 @@
-package main.java.com.appGerenciadorDeProcessos.Control;
+package com.appGerenciadorDeProcessos.Control;
 
 import java.util.Random;
 
-import main.java.com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorCPU;
-import main.java.com.appGerenciadorDeProcessos.Model.Cpu;
+import com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorCPU;
+import com.appGerenciadorDeProcessos.Model.Cpu;
 import com.appGerenciadorDeProcessos.Model.Memoria;
-import main.java.com.appGerenciadorDeProcessos.Model.Processo;
-import main.java.com.lib.ArvoreBinaria;
+import com.appGerenciadorDeProcessos.Model.Processo;
+import com.lib.ArvoreBinaria;
 
 public class GerenciadorDeProcessos {
     final Random rand = new Random();
