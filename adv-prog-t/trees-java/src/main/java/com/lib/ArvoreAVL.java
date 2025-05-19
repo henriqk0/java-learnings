@@ -9,6 +9,10 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
     }
     
     public int getFatorBalanceamento(No<T> noRaiz) {
+        if (noRaiz == null) {
+            return 0;
+        }
+        
         int he = getAlturaSubarvore(noRaiz.getFilhoEsquerda());
         int hd = getAlturaSubarvore(noRaiz.getFilhoDireita());
         return hd - he;
@@ -16,8 +20,15 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
 
     public void checarBalanceamento(No<T> noRaiz) {
         int fbRaiz = getFatorBalanceamento(raiz);
-        int fbFilhoDireita = getFatorBalanceamento(raiz.getFilhoDireita());
-        int fbFilhoEsquerda = getFatorBalanceamento(raiz.getFilhoEsquerda());
+        int fbFilhoDireita = 0;
+        int fbFilhoEsquerda = 0;
+
+        if (noRaiz.getFilhoDireita() != null){
+            fbFilhoDireita = getFatorBalanceamento(raiz.getFilhoDireita());
+        }
+        if (noRaiz.getFilhoEsquerda() != null){
+            fbFilhoEsquerda = getFatorBalanceamento(raiz.getFilhoEsquerda());
+        }
 
         if (fbRaiz == 2 && fbFilhoDireita > 0) {
             // rotação à esquerda
@@ -53,7 +64,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
     @Override
     public void adicionar(T valor) { 
         No<T> novoNo = new No<T>(valor);
-        adicionarRecursivo(this.raiz, novoNo);       
+        raiz = adicionarRecursivo(this.raiz, novoNo);       
     }
     
     public No<T> rotacaoDireita(No<T> rotac) {
