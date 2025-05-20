@@ -12,13 +12,13 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         if (noRaiz == null) {
             return 0;
         }
-        
+
         int he = getAlturaSubarvore(noRaiz.getFilhoEsquerda());
         int hd = getAlturaSubarvore(noRaiz.getFilhoDireita());
         return hd - he;
     }
 
-    public No<T> checarBalanceamento(No<T> noRaiz) {
+    public No<T> balancear(No<T> noRaiz) {
         int fbRaiz = getFatorBalanceamento(noRaiz);
         int fbFilhoDireita = 0;
         int fbFilhoEsquerda = 0;
@@ -57,7 +57,7 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         } else {
             raiz.setFilhoDireita(adicionarRecursivo(raiz.getFilhoDireita(), novoNo));
         }
-        raiz = checarBalanceamento(raiz);
+        raiz = balancear(raiz);
 
         return raiz;
     }
@@ -102,68 +102,71 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T>{
         return 1 + Math.max(getAlturaSubarvore(no.getFilhoEsquerda()), getAlturaSubarvore(no.getFilhoDireita()));
     }
     
-    /* 
-    public No<T> removeMin(No<T> no){ // `Min` de mínimo, levando em consideração que os elementos à esquerda são menores
-        // remove o sucessor substituindo pelo filho à direita
-        if (no.getFilhoEsquerda() == null) { // já é o elemento mais à esquerda da subarvore
-            return no.getFilhoDireita(); // então, retorna o seu elemento à direita
-        }
-        else {
-            no.setFilhoEsquerda(removeMin(no.getFilhoEsquerda()));
-            checarBalanceamento(no);
-        }
-    }
-
-    public No<T> sucessorAux(No<T> noAux) { 
-        if (noAux.getFilhoEsquerda() == null) { // já é o elemento mais à esquerda da subarvore
-            return noAux.getFilhoDireita(); // então, retorna o seu elemento à direita
-        }
-        else {
-            sucessorAux(noAux.getFilhoEsquerda());
-        }
-    }
-
-    public No<T> removeRec(No<T> no, T valor) {
-        No<T> novaRaizSub = no;
-
-        if (this.comparador.compare(no.getValor(), valor) == 0) {
-            if (no.getFilhoEsquerda == null) {
-                novaRaizSub = no.getFilhoDireita();
-            } else if (no.getFilhoDireita == null) {
-                novaRaizSub = no.getFilhoEsquerda();
-            } 
-            else { // tem dois filhos, devemos checar o balanecamento 
-                novaRaizSub = sucessorAux(no.getFilhoDireita());
-
-                novaRaizSub.setFilhoDireita(removeMin(no.getFilhoDireita()));
-                novaRaizSub.setFilhoEsquerda(no.getFilhoEsquerda());
-            }
-
-            if (this.raiz == no) {this.raiz = novaRaizSub;}
-            no = null;
-        } 
-        else {
-            if (this.comparador.compare(no.getValor(), valor) < 0) {
-                no.setFilhoEsquerda(removeRec(no.getFilhoEsquerda(), valor));
-            }
-            else {
-                no.setFilhoDireita(removeRec(no.getFilhoDireita(), valor));
-            }
-        }
-        // para cada nó empilhado, checamos o balanceamento
-        checarBalanceamento(novaRaizSub);
-    }
-
-    // TODO: debugar a remoção também
-    @Override
     public T remover(T valor) {
-        if (this.raiz == null) {
-            return null;
+        ResultadoRemocao<T> resultado = remover(raiz, valor);
+        raiz = resultado.no;
+        return resultado.removido;
+    }
+
+    // Classe auxiliar interna 
+    private static class ResultadoRemocao<T> {
+        No<T> no;
+        T removido;
+
+        ResultadoRemocao(No<T> no, T removido) {
+            this.no = no;
+            this.removido = removido;
+        }
+    }
+
+    private ResultadoRemocao<T> remover(No<T> no, T valor) {
+        if (no == null) {
+            return new ResultadoRemocao<>(null, null); // Valor não encontrado
         }
 
-        No<T> auxNoTeste = this.raiz;
-        removeRec(auxNoTeste, valor);
-    }
-    */
+        T removido = null;
+        int cmp = comparador.compare(valor, no.getValor());
 
+        if (cmp < 0) {
+            ResultadoRemocao<T> resEsquerda = remover(no.getFilhoEsquerda(), valor);
+            no.setFilhoEsquerda(resEsquerda.no);
+            removido = resEsquerda.removido;
+        } else if (cmp > 0) {
+            ResultadoRemocao<T> resDireita = remover(no.getFilhoDireita(), valor);
+            no.setFilhoDireita(resDireita.no);
+            removido = resDireita.removido;
+        } else {
+            // Encontrado — remover
+            removido = no.getValor();
+
+            if (no.getFilhoEsquerda() == null && no.getFilhoDireita() == null) {
+                return new ResultadoRemocao<>(null, removido);
+            }
+
+            if (no.getFilhoEsquerda() == null) {
+                return new ResultadoRemocao<>(no.getFilhoDireita(), removido);
+            }
+
+            if (no.getFilhoDireita() == null) {
+                return new ResultadoRemocao<>(no.getFilhoEsquerda(), removido);
+            }
+
+            // Dois filhos
+            No<T> sucessor = encontrarMinimo(no.getFilhoDireita());
+            no.setValor(sucessor.getValor());
+            ResultadoRemocao<T> resSub = remover(no.getFilhoDireita(), sucessor.getValor());
+            no.setFilhoDireita(resSub.no);
+        }
+
+        // Rebalancear e retornar resultado
+        return new ResultadoRemocao<>(balancear(no), removido);
+    }
+
+    private No<T> encontrarMinimo(No<T> no) {
+        while (no.getFilhoEsquerda() != null) {
+            no = no.getFilhoEsquerda();
+        }
+        return no;
+    }
+    
 }

@@ -77,18 +77,6 @@ public class No<T> {
         return filho;
     }
 
-    private No<T> rotacaoEsquerdaDireita(No<T> raiz){
-        raiz.setFilhoEsquerda(this.rotacaoEsquerdaDireita(raiz.getFilhoEsquerda()));
-
-        return this.rotacaoDireita(raiz);
-    }
-    
-    private No<T> rotacaoDireitaEsquerda(No<T> raiz){
-        raiz.setFilhoDireita(this.rotacaoDireitaEsquerda(raiz.getFilhoDireita()));
-
-        return this.rotacaoEsquerda(raiz);
-    }
-
     public int obterAltura(){ return obterAltura(this);}
 
     private int obterAltura(No<T> raiz){
