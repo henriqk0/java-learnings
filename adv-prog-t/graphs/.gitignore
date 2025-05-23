@@ -1,0 +1,22 @@
+# Ignore compiled classes
+/bin/
+/target/
+
+# Ignore IDE-specific files (Eclipse, IntelliJ, etc.)
+.idea/
+*.iml
+.vscode/
+
+# Ignore Maven wrapper files (if using Maven wrapper)
+.mvn/
+mvnw
+mvnw.cmd
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+
+# Ignore txt files
+*.txt
