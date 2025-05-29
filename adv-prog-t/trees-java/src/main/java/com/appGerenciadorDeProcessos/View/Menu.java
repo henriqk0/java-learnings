@@ -79,7 +79,7 @@ public class Menu {
         Menu.exibir();
         int opcao = scanner.nextInt();
 
-        while (opcao != 7) {
+        while (opcao != 5) {
             switch (opcao) {
                 case 1 -> {
                     System.out.println("Adicionando um novo processo...");
