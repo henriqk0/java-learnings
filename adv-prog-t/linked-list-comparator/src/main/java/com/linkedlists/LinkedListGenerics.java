@@ -1,5 +1,7 @@
-package com.linkedlists;
+package main.java.com.linkedlists;
 import java.util.Comparator;
+
+import com.student.StudentRegistrationComparator;
 
 public class LinkedListGenerics<T> {
     private NodeGenerics<T> first;
@@ -8,11 +10,11 @@ public class LinkedListGenerics<T> {
     private final boolean ordered;
     private Comparator<T> comparator; 
 
-    public LinkedListGenerics(boolean itsOrdered, Comparator<T> comparator){ 
+    public LinkedListGenerics(boolean itsOrdered, StudentRegistrationComparator comparator){
         this.first = this.last = null;
         this.length = 0;
         this.ordered = itsOrdered;
-        this.comparator = comparator;
+        this.comparator = (Comparator<T>) comparator;
     }
 
     public boolean isOrdered() {

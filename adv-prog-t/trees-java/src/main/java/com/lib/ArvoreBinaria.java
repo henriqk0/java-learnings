@@ -4,18 +4,21 @@
 package com.lib;
 
 import java.util.Stack;
-
 import java.util.Comparator;
 
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     
     protected No<T> raiz = null;
-    protected Comparator<T> comparador; 
+    protected Comparator<T> comparador;
   
     public ArvoreBinaria(Comparator<T> comp) {
         comparador = comp;
     }
     
+    public No<T> getRaiz() {
+        return raiz;
+    }
+
     public void adicionar(T valor) {
         No<T> novo = new No<T>(valor);
 

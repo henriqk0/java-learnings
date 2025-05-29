@@ -1,10 +1,17 @@
 package com.appGerenciadorDeProcessos.View;
 
+//Classes utilitárias
 import java.io.IOException;
 import java.util.Scanner;
 
-import com.appGerenciadorDeProcessos.Comparators.*;
+//Comparadores
+import com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorID;
+import com.appGerenciadorDeProcessos.Comparators.ComparadorProcessoPorNome;
+
+//Controllers
 import com.appGerenciadorDeProcessos.Control.GerenciadorDeProcessos;
+
+//Models
 import com.appGerenciadorDeProcessos.Model.Processo;
 
 public class Menu {
@@ -61,7 +68,6 @@ public class Menu {
         //Instanciando o gerenciador de processos
         GerenciadorDeProcessos gerenciador = new GerenciadorDeProcessos();
 
-        
         System.out.println("Bem-vindo. Quantos processos deseja gerar?");
         System.out.print("--> ");
         int quantidade_processos = scanner.nextInt();
@@ -73,7 +79,7 @@ public class Menu {
         Menu.exibir();
         int opcao = scanner.nextInt();
 
-        while (opcao != 5) {
+        while (opcao != 7) {
             switch (opcao) {
                 case 1 -> {
                     System.out.println("Adicionando um novo processo...");
@@ -189,5 +195,6 @@ public class Menu {
             else { System.out.print("\033\143"); }
         } catch (IOException | InterruptedException ex) {}
     }
-        
+
+
 }
