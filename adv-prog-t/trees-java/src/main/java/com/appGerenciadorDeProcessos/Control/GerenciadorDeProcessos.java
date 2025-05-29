@@ -73,8 +73,10 @@ public class GerenciadorDeProcessos {
         usoCPU = Math.round(usoCPU * 100.0) / 10000.0; // Arredondando para 4 casas decimais
         double usoMemoria = (rand.nextDouble() * m.getAvailableSize() * 0.1);
         usoMemoria = Math.round(usoMemoria * 10000.0) / 10000.0; // Arredondando para 4 casas decimais
+
+        this.quantidadeProcessos++;
         
-        return new Processo(this.quantidadeProcessos + 1, nome, usoCPU, usoMemoria);
+        return new Processo(this.quantidadeProcessos, nome, usoCPU, usoMemoria);
     }
 
     // numProcessos é o número de processos que deseja-se gerar

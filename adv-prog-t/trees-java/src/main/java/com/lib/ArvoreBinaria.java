@@ -151,8 +151,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
                         }
                     }
                 }
-                auxNoTeste = null; // "desaloca o no removido"
-                return valor;
+                return auxNoTeste.getValor();
             }
 
             else {
@@ -168,6 +167,94 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         }
         return null;
     }
+
+    public T removerPorComparador(T valor, Comparator<T> comparadorBusca) {
+    if (raiz == null) {
+        return null;
+    }
+
+    No<T> auxNoTeste = this.raiz;
+    No<T> auxNoAnterior = auxNoTeste;
+
+    while (auxNoTeste != null) {
+        if (comparadorBusca.compare(auxNoTeste.getValor(), valor) == 0) {
+
+            if (auxNoTeste.getFilhoDireita() != null || auxNoTeste.getFilhoEsquerda() != null) {
+
+                // Nó com dois filhos
+                if (auxNoTeste.getFilhoDireita() != null && auxNoTeste.getFilhoEsquerda() != null) {
+                    No<T> auxNoSucessorInOrd = auxNoTeste.getFilhoEsquerda();
+
+                    // Encontra o maior da subárvore esquerda (máximo da esquerda)
+                    while (auxNoSucessorInOrd.getFilhoDireita() != null) {
+                        auxNoSucessorInOrd = auxNoSucessorInOrd.getFilhoDireita();
+                    }
+
+                    auxNoSucessorInOrd.setFilhoDireita(auxNoTeste.getFilhoDireita());
+
+                    if (auxNoAnterior == auxNoTeste) {
+                        this.raiz = auxNoSucessorInOrd; // Removendo a raiz
+                    } else {
+                        if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
+                            auxNoAnterior.setFilhoDireita(auxNoSucessorInOrd);
+                        } else {
+                            auxNoAnterior.setFilhoEsquerda(auxNoSucessorInOrd);
+                        }
+                    }
+                }
+
+                // Nó com apenas um filho
+                else {
+                    No<T> filhoUnico = (auxNoTeste.getFilhoEsquerda() != null) 
+                                        ? auxNoTeste.getFilhoEsquerda() 
+                                        : auxNoTeste.getFilhoDireita();
+
+                    if (auxNoAnterior != auxNoTeste) {
+                        if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
+                            auxNoAnterior.setFilhoDireita(filhoUnico);
+                        } else {
+                            auxNoAnterior.setFilhoEsquerda(filhoUnico);
+                        }
+                    } else {
+                        this.raiz = filhoUnico;
+                    }
+
+                    auxNoTeste.setFilhoDireita(null);
+                    auxNoTeste.setFilhoEsquerda(null);
+                }
+            }
+
+            // Nó folha (sem filhos)
+            else {
+                if (auxNoAnterior != auxNoTeste) {
+                    if (auxNoAnterior.getFilhoDireita() == auxNoTeste) {
+                        auxNoAnterior.setFilhoDireita(null);
+                    } else {
+                        auxNoAnterior.setFilhoEsquerda(null);
+                    }
+                } else {
+                    this.raiz = null;
+                }
+            }
+
+            return auxNoTeste.getValor();
+        }
+
+        // Percorre a árvore manualmente (não segue necessariamente a indexação)
+        if (auxNoTeste.getFilhoEsquerda() != null) {
+            auxNoAnterior = auxNoTeste;
+            auxNoTeste = auxNoTeste.getFilhoEsquerda();
+        } else if (auxNoTeste.getFilhoDireita() != null) {
+            auxNoAnterior = auxNoTeste;
+            auxNoTeste = auxNoTeste.getFilhoDireita();
+        } else {
+            break;
+        }
+    }
+
+    return null;
+}
+
 
     @Override
     public int altura() {
@@ -233,7 +320,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     public String caminharEmNivel() { // ou por prefixo
         String valoresFinais = "[";
         if (this.raiz == null) {
-            return valoresFinais += "]";
+            return valoresFinais + "]";
         }
 
         Stack<No<T>> stack = new Stack<>();
@@ -276,7 +363,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
             auxNo = auxNo.getFilhoDireita();
         }
-        return valoresFinais += "]";
+        return valoresFinais + "]";
     }
-        
+
 }

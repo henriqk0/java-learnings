@@ -54,12 +54,11 @@ public class Processo {
     
     @Override
     public String toString() {
-        return "Processo {" +
-                " Id: " + id +
+        return  "Id: " + id +
                 ", Nome: " + nome +
                 ", UsoCPU: " + usoCPU +
-                ", UsoMemoria: " + usoMemoria + " MB" +
-                '}';
+                ", UsoMemoria: " + usoMemoria + " MB"
+                ;
     }
     
 }

@@ -9,28 +9,44 @@ import com.appGerenciadorDeProcessos.Model.Processo;
 
 public class Menu {
 
-    public static void exibir(){
-         System.out.print(
-            "\n##################################" +
-            "\nEscreva o numero de uma opcao:\n" +
-            "1) Adicionar um novo processo\n" +
-            "2) Remover um processo \n" +
-            "3) Pesquisar por um processo \n" +
-            "4) Visualizar processos \n" +
-            "5) Sair \n" +
-            "--> "
-        );
+    private static void exibir(){
+         System.out.print("""
+                          
+                          ##################################
+                          Escreva o numero de uma opcao:
+                          1) Adicionar um novo processo
+                          2) Remover um processo 
+                          3) Pesquisar por um processo 
+                          4) Visualizar processos 
+                          5) Sair
+                          """);
+                          System.out.print("--> ");
     }
 
-    public static void exibirPesquisar(){
-        System.out.print(
-            "\n##################################" +
-            "\nEscreva o numero de uma opcao:\n" +
-            "1) Pesquisar por Nome\n" +
-            "2) Pesquisar por ID\n" +
-            "3) Pesquisar por Uso de CPU\n" +
-            "--> "
-        );
+    private static void exibirPesquisar(){
+        System.out.print("""
+                         
+                          ##################################
+                          Escreva o numero de uma opcao:
+                          1) Pesquisar por Nome
+                          2) Pesquisar por ID
+                          3) Pesquisar por Uso de CPU
+                          """);
+                          System.out.print("--> ");
+
+    }
+
+    private static void exibirRemover(){
+        System.out.print("""
+                         
+                          ##################################
+                          Escreva o numero de uma opcao:
+                          1) Remover por ID
+                          2) Remover por Nome
+                          3) Remover por Uso de CPU
+                          """);
+                          System.out.print("--> ");
+
     }
 
     public static void run() {
@@ -59,78 +75,103 @@ public class Menu {
 
         while (opcao != 5) {
             switch (opcao) {
-                case 1:
+                case 1 -> {
                     System.out.println("Adicionando um novo processo...");
                     System.out.print("Digite o nome do processo: ");
                     String nomeProcesso = scanner.next();
                     Processo novoProcesso = gerenciador.gerarProcesso(nomeProcesso);
                     gerenciador.getArvoreProcessos().adicionar(novoProcesso);
-                    break;
+                    System.out.println("Processo adicionado com sucesso! " + novoProcesso);
 
-                case 2:
+                }
+
+                case 2 -> {
                     System.out.println("Removendo um processo...");
-                    System.out.print("Digite o uso de CPU do processo (sim, isso nao faz sentido): ");
-                    double usoCPU = scanner.nextDouble();
-                    Processo processoRemover = gerenciador.getArvoreProcessos().remover(new Processo(usoCPU));
-                    if(processoRemover == null) {
-                        System.out.println("Processo não encontrado.");
-                    } else {
-                        System.out.println("Processo removido.");
+                    exibirRemover();
+                    int opcaoRemover = scanner.nextInt();
+                    switch (opcaoRemover) {
+                        case 1 -> {
+                            System.out.print("Digite o ID do processo: ");
+                            int idRemover = scanner.nextInt();
+                            Processo processoRemover = gerenciador.getArvoreProcessos().removerPorComparador(new Processo(idRemover), comparador_id);
+                            if (processoRemover != null) {
+                                System.out.println("Processo removido! " + processoRemover);
+                            } else {
+                                System.out.println("Processo não encontrado.");
+                            }
+                        }
+                        case 2 -> {
+                            System.out.print("Digite o nome do processo: ");
+                            String nomeRemover = scanner.next();
+                            Processo processoRemover = gerenciador.getArvoreProcessos().removerPorComparador(new Processo(nomeRemover), comparador_nome);
+                            if (processoRemover != null) {
+                                System.out.println("Processo removido! " + processoRemover);
+                            } else {
+                                System.out.println("Processo não encontrado.");
+                            }
+                        }
+                        case 3 -> {
+                            System.out.print("Digite o uso de CPU do processo (sim, isso nao faz o menor sentido): ");
+                            double usoCPURemover = scanner.nextDouble();
+                            Processo processoRemover = gerenciador.getArvoreProcessos().remover(new Processo(usoCPURemover));
+                            if (processoRemover != null) {
+                                System.out.println("Processo removido! " + processoRemover);
+                            } else {
+                                System.out.println("Processo não encontrado.");
+                            }
+                        }
+                        default -> System.out.println("Opcao invalida.");
                     }
-                    break;
+                }
 
-                case 3:
+                case 3 -> {
                     System.out.println("Pesquisando por um processo...");
                     exibirPesquisar();
                     int opcaoPesquisar = scanner.nextInt();
 
-                    if (opcaoPesquisar == 1) {
-                        System.out.print("Digite o nome do processo: ");
-                        String nomePesquisar = scanner.next();
-                        Processo processoEncontrado = gerenciador.getArvoreProcessos().
-                        pesquisar(new Processo(nomePesquisar), comparador_nome);
-
-                        if (processoEncontrado != null) {
-                            System.out.println("Processo encontrado: " + processoEncontrado);
-                        } else {
-                            System.out.println("Processo nao encontrado.");
-                        }
-
-                    } else if (opcaoPesquisar == 2) {
-                        System.out.print("Digite o ID do processo: ");
-                        int idPesquisar = scanner.nextInt();
-                        Processo processoEncontrado = gerenciador.getArvoreProcessos().
-                        pesquisar(new Processo(idPesquisar), comparador_id);
-
-                        if (processoEncontrado != null) {
-                            System.out.println("Processo encontrado: " + processoEncontrado);
-                        } else {
-                            System.out.println("Processo não encontrado.");
-                        }
+                switch (opcaoPesquisar) {
+                    case 1 -> {
+                            System.out.print("Digite o nome do processo: ");
+                            String nomePesquisar = scanner.next();
+                            Processo processoEncontrado = gerenciador.getArvoreProcessos().
+                                    pesquisar(new Processo(nomePesquisar), comparador_nome);
+                            if (processoEncontrado != null) {
+                                System.out.println("Processo encontrado: " + processoEncontrado);
+                            } else {
+                                System.out.println("Processo nao encontrado.");
+                            }                          
                     }
-
-                    else if (opcaoPesquisar == 3) {
-                        System.out.print("Digite o uso de CPU do processo (sim, isso nao faz o menor sentido): ");
-                        double usoCPUPesquisar = scanner.nextDouble();
-                        Processo processoEncontrado = gerenciador.getArvoreProcessos().
-                        pesquisar(new Processo(usoCPUPesquisar));
-
-                        if (processoEncontrado != null) {
-                            System.out.println("Processo encontrado: " + processoEncontrado);
-                        } else {
-                            System.out.println("Processo não encontrado.");
-                        }
+                    case 2 -> {
+                            System.out.print("Digite o ID do processo: ");
+                            int idPesquisar = scanner.nextInt();
+                            Processo processoEncontrado = gerenciador.getArvoreProcessos().
+                                    pesquisar(new Processo(idPesquisar), comparador_id);
+                            if (processoEncontrado != null) {
+                                System.out.println("Processo encontrado: " + processoEncontrado);
+                            } else {
+                                System.out.println("Processo não encontrado.");
+                            }                          
                     }
-                    else {
-                        System.out.println("Opcao invalida.");
+                    case 3 -> {
+                            System.out.print("Digite o uso de CPU do processo (sim, isso nao faz o menor sentido): ");
+                            double usoCPUPesquisar = scanner.nextDouble();
+                            Processo processoEncontrado = gerenciador.getArvoreProcessos().
+                                    pesquisar(new Processo(usoCPUPesquisar));
+                            if (processoEncontrado != null) {
+                                System.out.println("Processo encontrado: " + processoEncontrado);
+                            } else {
+                                System.out.println("Processo não encontrado.");
+                            }                         
                     }
-                    break;
-                case 4:
+                    default -> System.out.println("Opcao invalida.");
+                    
+                }
+                }
+                case 4 -> {
                     System.out.println("Visualizando processos...");
                     System.out.println(gerenciador.getArvoreProcessos().caminharEmOrdem());
-                    break;
-                default:
-                    System.out.println("Opcao invalida.");
+                }
+                default -> System.out.println("Opcao invalida.");
             }
             Menu.exibir();
             opcao = scanner.nextInt();
